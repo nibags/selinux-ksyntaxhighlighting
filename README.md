@@ -36,12 +36,24 @@ Copy the `.xml` files to `$HOME/.local/share/org.kde.syntax-highlighting/syntax/
 
 Ex.: 
 For local user:
-```
+```bash
 mkdir -p $HOME/.local/share/org.kde.syntax-highlighting/syntax/
 cp ./selinux-*.xml $HOME/.local/share/org.kde.syntax-highlighting/syntax/
 ```
 For all users:
-```
+```bash
 sudo mkdir -p /usr/share/org.kde.syntax-highlighting/syntax/
 sudo cp ./selinux-*.xml /usr/share/org.kde.syntax-highlighting/syntax/
+```
+
+## Usage:
+
+Syntax highlighting of SELinux CIL Policies is automatically applied to files with `.cil` extension. 
+Syntax highlighting of SELinux File Contexts is automatically applied to files with `.fc` extension 
+and the files with name: `file_contexts`, `file_contexts.local`, `file_contexts.homedirs`, `file_contexts.template` & `homedir_template`.
+
+You can also force the syntax highlighting, by writing a comment with: 
+```
+kate: syntax SELinux CIL Policy
+kate: syntax SELinux File Contexts
 ```

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd"
 [
+	<!ENTITY symbol         "\w\[\]\.@\=/\*\-&#036;&#037;\+&#033;\|&amp;\^&#058;&#126;&#096;#\{\}&#039;&lt;&gt;\?,\\"> <!-- [].@=/*-_$%+!|&^:~`#{}'<>?,\ -->
 	<!ENTITY identifier     "[a-zA-Z][\w\-]*">
-	<!ENTITY statementchar  "a-z_\-">	
+	<!ENTITY statementchar  "[a-z_\-]">	
 ]>
 
 <!--
   SELinux CIL (Common Interface Language) Policy Syntax Highlighting Definition 
   for the KDE's KSyntaxHighlighting Framework.
-  
-  NOTE: Part of this file (the brackets highlighting) is based on the Scheme 
-  syntax highlighting XML file, created by Dominik Haumann (dhaumann@kde.org).
   ==========================================================================================
+   NOTE: Part of this file (the highlighting of brackets) is based on the Scheme XML file, 
+   created by Dominik Haumann (dhaumann@kde.org) & licensed under MIT; 
+   which is part of the KDE's KSyntaxHighlighting Framework.
+   
    Copyright (c) 2018 Nibaldo González S. (nibgonz@gmail.com)
   
    Permission is hereby granted, free of charge, to any person obtaining a copy of this
@@ -30,19 +32,19 @@
    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   ==========================================================================================
-  NOTE: Valid symbols in CIL: alphanumeric and [].@=/*-_$%+-!|&^:~`#{}'<>?,\
   
   Change log:
-  	* Version 1 [20-Jan-2018, by Nibaldo González]:
+  	* Version 1 [26-Jan-2018, by Nibaldo González]:
 		- Initial version.
 -->
 
 <language name="SELinux CIL Policy"
 		version="1"
-        kateversion="5.0"
+		kateversion="5.0"
 		section="Sources"
 		extensions="*.cil"
 		priority="8"
+		mimetype=""
 		author="Nibaldo González (nibgonz@gmail.com)"
 		license="MIT">
 
@@ -61,7 +63,6 @@
 			<item>domby</item>
 			<item>incomp</item>
 			<item>range</item>
-			<!-- equals, notequal -->
 		</list>
 
 		<!-- Access Vector Rules -->
@@ -102,6 +103,10 @@
 			<item>udp</item>
 			<item>dccp</item>
 		</list>
+		
+		<list name="special_keys">
+			<item>self</item>
+		</list>
 		<list name="classorder_keys">
 			<item>unordered</item>
 		</list>
@@ -109,9 +114,6 @@
 			<item>allow</item>
 			<item>deny</item>
 			<item>reject</item>
-		</list>
-		<list name="special_keys">
-			<item>self</item>
 		</list>
 
 		<list name="type_statements">
@@ -267,7 +269,7 @@
 			<item>neverallowxperm</item>
 		</list>
 
-		<list name="id_type">
+		<list name="type_name">
 			<item>string</item>
 			<item>name</item>
 			<item>ioctl</item>
@@ -655,23 +657,23 @@
 				<IncludeRules context="_common"/>
 			</context>
 			<context name="_common" attribute="Normal Text" lineEndContext="#stay">
-				<DetectChar attribute="Comment" context="_comment" char=";" />
+				<DetectChar context="_comment" attribute="Comment" char=";"/>
 				<DetectChar context="_quoted" attribute="Text Quoted" char="&quot;"/>
 				<RegExpr context="_path_content" attribute="Path" String="/(?![\s\(\)&quot;/])" insensitive="true"/>
 				<RegExpr context="#stay" attribute="Path" String="/(?=([\s\(\)]|$))" insensitive="true"/>
 				<!-- IPv4 -->
 				<RegExpr context="#stay" attribute="IP Address" String="\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"/>
 				<!-- IPv6 -->
-				<RegExpr context="#stay" attribute="IP Address" String="\b([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:\b"/>
+				<RegExpr context="#stay" attribute="IP Address" String="\b([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:"/>
 				<HlCOct context="#stay" attribute="Octal"/>
         		<HlCHex context="#stay" attribute="Hex"/>
 				<RegExpr context="#stay" attribute="Number" String="\b\d+(?=([\s\(\)]|$))"/>
 				
 				<RegExpr context="#stay" attribute="Normal Text" String="(\b&identifier;)?(\.&identifier;)+(?=([\s\(\)]|$))"/>
-				<IncludeRules context="_general_globbing"/>
-				<AnyChar context="_path_content" attribute="Normal Text" String="{[" lookAhead="true"/>
+				<DetectChar context="#stay" attribute="Special Char" char="*"/>
+				<HlCStringChar context="#stay" attribute="Escape Expression"/>
 				<!-- File contexts: user_u:role_r:type_t:s0:c0 -->
-				<RegExpr context="#stay" attribute="File Contexts" String="\b[^\s:,\(\)\=&quot;&#039;&#096;]+(:[^\s:,\(\)\=&quot;&#039;&#096;]+){2,4}\b"/>
+				<RegExpr context="#stay" attribute="File Contexts" String="\b[^\s:\(\)&quot;]+(:[^\s:\(\)&quot;]+){2}(:[^\s:\(\)&quot;]+)*(?=([^&symbol;]|\s|$))"/>
 			</context>
 
 			<context name="_comment" attribute="Comment" lineEndContext="#pop">
@@ -682,13 +684,17 @@
 			</context>
 			<context name="_quoted" attribute="Text Quoted" lineEndContext="#stay">
 				<DetectChar context="#pop" attribute="Text Quoted" char="&quot;"/>
-				<IncludeRules context="_globbing"/>
-				<DetectChar context="_round_brackets" attribute="Globbing Brackets" char="("/>
+				<DetectChar context="_square_brackets" attribute="Pattern Brackets" char="["/>
+				<DetectChar context="_round_brackets" attribute="Pattern Brackets" char="("/>
+				<IncludeRules context="_quantification_brackets"/>
+				<IncludeRules context="_path_special_chars"/>
 			</context>
 			<context name="_path_content" attribute="Path" lineEndContext="#pop">
-				<DetectSpaces context="#pop" lookAhead="true"/>
-				<AnyChar context="#pop" attribute="Path" String=")(" lookAhead="true" insensitive="true"/>
-				<IncludeRules context="_globbing"/>
+				<DetectSpaces context="#pop" attribute="Normal Text" lookAhead="true"/>
+				<RegExpr context="#pop" attribute="Normal Text" String="[^&symbol;]" lookAhead="true"/>
+				<DetectChar context="_square_brackets_path" attribute="Pattern Brackets" char="["/>
+				<IncludeRules context="_quantification_brackets"/>
+				<IncludeRules context="_path_special_chars"/>
 			</context>
 
 			<!-- RULES -->
@@ -731,8 +737,8 @@
 				<keyword context="#stay" attribute="Access Keys" String="access"/>
 
 				<keyword context="#stay" attribute="Booleans" String="booleans"/>
-				<keyword context="#stay" attribute="Name Type" String="classorder_keys"/>
-				<keyword context="#stay" attribute="Name Type" String="id_type"/>
+				<keyword context="#stay" attribute="Type Name" String="classorder_keys"/>
+				<keyword context="#stay" attribute="Type Name" String="type_name"/>
 			</context>
 			<context name="_default_rule" attribute="Normal Text" lineEndContext="#stay">
 				<IncludeRules context="_common"/>
@@ -751,19 +757,19 @@
 				<keyword context="#stay" attribute="Permissions" String="av_permissions"/>
 			</context>
 			<context name="_default_rule_bracket" attribute="Normal Text" lineEndContext="#stay">
-				<DetectSpaces />
-				<DetectChar attribute="Comment" context="_comment" char=";" />
+				<DetectSpaces context="#stay" attribute="Normal Text"/>
+				<DetectChar context="_comment" attribute="Comment" char=";" />
 			</context>
 
 			<!-- Levels of rule brackets.
 				 Only the first word of a rule can be highlighted as a statement keyword. -->
 			<context name="_rule_bracket_level1" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_without_statement_level1" lineEndContext="#stay">
 				<IncludeRules context="_default_rule_bracket"/> <!-- Detect spaces & comments -->
-				<RegExpr context="#pop!_statement_level1" attribute="Normal Text" String="[&statementchar;]" lookAhead="true"/> <!-- Detect first word -->
+				<RegExpr context="#pop!_statement_level1" attribute="Normal Text" String="&statementchar;" lookAhead="true"/> <!-- Detect first word -->
 			</context>
 			<context name="_statement_level1" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level1" lineEndContext="#pop!_rule_level1">
 				<IncludeRules context="_default_statement"/>
-				<RegExpr context="#pop!_rule_without_statement_level1" attribute="Normal Text" String="[&statementchar;]+" lookAhead="true"/>
+				<RegExpr context="#pop!_rule_without_statement_level1" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
 			</context>
 			<context name="_rule_level1" attribute="Normal Text" lineEndContext="#stay"> <!-- Rule content -->
 				<DetectChar attribute="Brackets2" context="_rule_bracket_level2" char="("/>
@@ -777,11 +783,11 @@
 			
 			<context name="_rule_bracket_level2" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_without_statement_level2" lineEndContext="#stay">
 				<IncludeRules context="_default_rule_bracket"/>
-				<RegExpr context="#pop!_statement_level2" attribute="Normal Text" String="[&statementchar;]" lookAhead="true"/>
+				<RegExpr context="#pop!_statement_level2" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 			</context>
 			<context name="_statement_level2" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level2" lineEndContext="#pop!_rule_level2">
 				<IncludeRules context="_default_statement"/>
-				<RegExpr context="#pop!_rule_without_statement_level2" attribute="Normal Text" String="[&statementchar;]+" lookAhead="true"/>
+				<RegExpr context="#pop!_rule_without_statement_level2" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
 			</context>			
 			<context name="_rule_level2" attribute="Normal Text" lineEndContext="#stay">
 				<DetectChar attribute="Brackets3" context="_rule_bracket_level3" char="("/>
@@ -795,11 +801,11 @@
 
 			<context name="_rule_bracket_level3" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_without_statement_level3" lineEndContext="#stay">
 				<IncludeRules context="_default_rule_bracket"/>
-				<RegExpr context="#pop!_statement_level3" attribute="Normal Text" String="[&statementchar;]" lookAhead="true"/>
+				<RegExpr context="#pop!_statement_level3" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 			</context>
 			<context name="_statement_level3" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level3" lineEndContext="#pop!_rule_level3">
 				<IncludeRules context="_default_statement"/>
-				<RegExpr context="#pop!_rule_without_statement_level3" attribute="Normal Text" String="[&statementchar;]+" lookAhead="true"/>
+				<RegExpr context="#pop!_rule_without_statement_level3" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
 			</context>
 			<context name="_rule_level3" attribute="Normal Text" lineEndContext="#stay">
 				<DetectChar attribute="Brackets4" context="_rule_bracket_level4" char="("/>
@@ -813,11 +819,11 @@
 
 			<context name="_rule_bracket_level4" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_without_statement_level4" lineEndContext="#stay">
 				<IncludeRules context="_default_rule_bracket"/>
-				<RegExpr context="#pop!_statement_level4" attribute="Normal Text" String="[&statementchar;]" lookAhead="true"/>
+				<RegExpr context="#pop!_statement_level4" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 			</context>
 			<context name="_statement_level4" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level4" lineEndContext="#pop!_rule_level4">
 				<IncludeRules context="_default_statement"/>
-				<RegExpr context="#pop!_rule_without_statement_level4" attribute="Normal Text" String="[&statementchar;]+" lookAhead="true"/>
+				<RegExpr context="#pop!_rule_without_statement_level4" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
 			</context>
 			<context name="_rule_level4" attribute="Normal Text" lineEndContext="#stay">
 				<DetectChar attribute="Brackets5" context="_rule_bracket_level5" char="("/>
@@ -831,11 +837,11 @@
 
 			<context name="_rule_bracket_level5" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_without_statement_level5" lineEndContext="#stay">
 				<IncludeRules context="_default_rule_bracket"/>
-				<RegExpr context="#pop!_statement_level5" attribute="Normal Text" String="[&statementchar;]" lookAhead="true"/>
+				<RegExpr context="#pop!_statement_level5" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 			</context>
 			<context name="_statement_level5" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level5" lineEndContext="#pop!_rule_level5">
 				<IncludeRules context="_default_statement"/>
-				<RegExpr context="#pop!_rule_without_statement_level5" attribute="Normal Text" String="[&statementchar;]+" lookAhead="true"/>
+				<RegExpr context="#pop!_rule_without_statement_level5" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
 			</context>
 			<context name="_rule_level5" attribute="Normal Text" lineEndContext="#stay">
 				<DetectChar attribute="Brackets6" context="_rule_bracket_level6" char="("/>
@@ -849,11 +855,11 @@
 
 			<context name="_rule_bracket_level6" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_without_statement_level6" lineEndContext="#stay">
 				<IncludeRules context="_default_rule_bracket"/>
-				<RegExpr context="#pop!_statement_level6" attribute="Normal Text" String="[&statementchar;]" lookAhead="true"/>
+				<RegExpr context="#pop!_statement_level6" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 			</context>
 			<context name="_statement_level6" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level6" lineEndContext="#pop!_rule_level6">
 				<IncludeRules context="_default_statement"/>
-				<RegExpr context="#pop!_rule_without_statement_level6" attribute="Normal Text" String="[&statementchar;]+" lookAhead="true"/>
+				<RegExpr context="#pop!_rule_without_statement_level6" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
 			</context>
 			<context name="_rule_level6" attribute="Normal Text" lineEndContext="#stay">
 				<DetectChar attribute="Brackets1" context="_rule_bracket_level1" char="("/>
@@ -865,49 +871,53 @@
 				<IncludeRules context="_default_rule_without_statement"/>
 			</context>
 
-			<!-- Globbing -->
-			<context name="_globbing" attribute="Normal Text" lineEndContext="#stay">
-				<DetectChar context="_curly_brackets" attribute="Globbing Brackets" char="{"/>
-				<DetectChar context="_square_brackets" attribute="Globbing Brackets" char="["/>
-				<IncludeRules context="_globbing_chars"/>
+			<!-- Regex (FCGlob?) -->
+			<context name="_path_special_chars" attribute="Normal Text" lineEndContext="#stay">
+				<IncludeRules context="_special_chars"/>
+				<IncludeRules context="_escape"/>
 			</context>
-			<context name="_globbing_chars" attribute="Normal Text" lineEndContext="#stay">
-				<IncludeRules context="_general_globbing"/>
-				<RegExpr context="#stay" attribute="Globbing Char" String="\\[\ssSiIcCdDwWbBx\|\.\-\^\?\*\+\{\}\(\)\[\]]"/>
-				<DetectChar context="#stay" attribute="Globbing Char" char="?"/>
+			<context name="_special_chars" attribute="Normal Text" lineEndContext="#stay">
+				<AnyChar context="#stay" attribute="Special Char" String="*?.+"/>
 			</context>
-			<context name="_general_globbing" attribute="Normal Text" lineEndContext="#stay">
-				<DetectChar context="#stay" attribute="Globbing Char" char="*"/>
-				<HlCStringChar context="#stay" attribute="Globbing Char"/>
+			<context name="_escape" attribute="Normal Text" lineEndContext="#stay">
+				<HlCStringChar context="#stay" attribute="Escape Expression"/>
+				<RegExpr context="#stay" attribute="Escape Expression" String="\\[\ssSdDwWbBAZiIcC\|\.\-\^\?\*\+\(\)\[\]\{\},]"/>
 			</context>
-			<!-- Groups: [ ] , { } and ( ) -->
-			<context name="_square_brackets" attribute="Globbing Brackets" lineEndContext="#pop">
-				<DetectChar context="#pop" attribute="Globbing Brackets" char="]"/>
-				<DetectSpaces context="#pop" lookAhead="true"/>
+			<context name="_quantification_brackets" attribute="Normal Text" lineEndContext="#stay">
+				<!-- {n} {min,} {,max} {min,max} -->
+				<RegExpr context="#stay" attribute="Pattern Brackets" String="\{(\d+(,\d*)?|,\d+)\}"/>
+			</context>
+			<!-- Groups: [ ] and ( ) -->
+			<context name="_square_brackets" attribute="Pattern Brackets" lineEndContext="#pop">
+				<DetectChar context="#pop" attribute="Pattern Brackets" char="]"/>
+				<IncludeRules context="_escape"/>
+
+				<DetectSpaces context="#pop" attribute="Normal Text" lookAhead="true"/>
+				<DetectChar context="#pop" attribute="Normal Text" char="&quot;" lookAhead="true"/>
 				<DetectChar context="#stay" attribute="Error" char="["/>
-				<RegExpr context="#stay" attribute="Globbing Brackets Open" String="\S(?=(\s|$))"/>
-				<IncludeRules context="_globbing_chars"/>
-				<DetectChar context="#stay" attribute="Globbing Char 2" char="^"/>
-				<DetectChar context="#stay" attribute="Globbing Char 2" char="-"/>
+				<RegExpr context="#stay" attribute="Open Pattern Brackets" String="[^\s\]](?=([\s&quot;]|$))"/>
+				
+				<AnyChar context="#stay" attribute="Special Char 2" String="^-"/>
+				<IncludeRules context="_special_chars"/>
 			</context>
-			<context name="_curly_brackets" attribute="Globbing Brackets" lineEndContext="#pop">
-				<DetectChar context="#pop" attribute="Globbing Brackets" char="}"/>
-				<DetectSpaces context="#pop" lookAhead="true"/>
-				<DetectChar context="_curly_brackets" attribute="Globbing Brackets" char="{"/>
-				<DetectChar context="_square_brackets" attribute="Globbing Brackets" char="["/>
-				<RegExpr context="#stay" attribute="Globbing Brackets Open" String="[^\s\[\]\{\}](?=(\s|$))"/>
-				<IncludeRules context="_globbing_chars"/>
-				<DetectChar context="#stay" attribute="Globbing Char 2" char=","/>
+			<context name="_round_brackets" attribute="Pattern Brackets" lineEndContext="#pop">
+				<DetectChar context="#pop" attribute="Pattern Brackets" char=")"/>
+				<IncludeRules context="_escape"/>
+
+				<DetectSpaces context="#pop" attribute="Normal Text" lookAhead="true"/>
+				<DetectChar context="#pop" attribute="Normal Text" char="&quot;" lookAhead="true"/>
+				<DetectChar context="_square_brackets" attribute="Pattern Brackets" char="["/>
+				<DetectChar context="_round_brackets" attribute="Pattern Brackets" char="("/>
+				<IncludeRules context="_quantification_brackets"/>
+				<RegExpr context="#stay" attribute="Open Pattern Brackets" String="[^\s\[\]\(\)](?=([\s&quot;]|$))"/>
+
+				<DetectChar context="#stay" attribute="Special Char 2" char="|"/>
+				<IncludeRules context="_special_chars"/>
 			</context>
-			<context name="_round_brackets" attribute="Globbing Brackets" lineEndContext="#pop">
-				<DetectChar context="#pop" attribute="Globbing Brackets" char=")"/>
-				<DetectSpaces context="#pop" lookAhead="true"/>
-				<DetectChar context="_round_brackets" attribute="Globbing Brackets" char="("/>
-				<DetectChar context="_square_brackets" attribute="Globbing Brackets" char="["/>
-				<DetectChar context="_curly_brackets" attribute="Globbing Brackets" char="{"/>
-				<RegExpr context="#stay" attribute="Globbing Brackets Open" String="[^\s\[\]\(\)\{\}](?=(\s|$))"/>
-				<IncludeRules context="_globbing_chars"/>
-				<DetectChar context="#stay" attribute="Globbing Char 2" char="|"/>
+			<context name="_square_brackets_path" attribute="Pattern Brackets" lineEndContext="#pop">
+				<RegExpr context="#pop" attribute="Normal Text" String="[^&symbol;]" lookAhead="true"/>
+				<RegExpr context="#stay" attribute="Open Pattern Brackets" String="[^\s\]](?![&symbol;])"/>
+				<IncludeRules context="_square_brackets"/>
 			</context>
 			
 		</contexts>
@@ -923,7 +933,7 @@
 			<itemData name="Policy Config. Statements" defStyleNum="dsPreprocessor" bold="1" italic="0" underline="0" spellChecking="false"/>
 			<itemData name="Access Keys" defStyleNum="dsWarning" bold="1" italic="0" underline="0" spellChecking="false"/>
 			<itemData name="Expression Keys" defStyleNum="dsVariable" bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Name Type" defStyleNum="dsDataType" bold="1" italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Type Name" defStyleNum="dsDataType" bold="1" italic="0" underline="0" spellChecking="false"/>
 			<itemData name="Booleans" defStyleNum="dsExtension" bold="1" italic="0" underline="0" spellChecking="false"/>
 
 			<itemData name="Types" defStyleNum="dsDataType" bold="0" italic="0" underline="0" spellChecking="false"/>
@@ -944,10 +954,11 @@
 			<itemData name="Brackets5" defStyleNum="dsNormal" color="#000088" selColor="#000000" bold="1" italic="0"/>
 			<itemData name="Brackets6" defStyleNum="dsNormal" color="#880088" selColor="#000000" bold="1" italic="0"/>
 
-			<itemData name="Globbing Char" defStyleNum="dsSpecialChar" bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Globbing Char 2" defStyleNum="dsAnnotation" bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Globbing Brackets" defStyleNum="dsSpecialString" bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Globbing Brackets Open" defStyleNum="dsSpecialString" bold="0" italic="0" underline="1" spellChecking="false"/>
+			<itemData name="Special Char" defStyleNum="dsSpecialChar" bold="0" italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Special Char 2" defStyleNum="dsAnnotation" bold="0" italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Pattern Brackets" defStyleNum="dsSpecialString" bold="0" italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Open Pattern Brackets" defStyleNum="dsSpecialString" bold="0" italic="0" underline="1" spellChecking="false"/>
+			<itemData name="Escape Expression" defStyleNum="dsSpecialChar" bold="0" italic="0" underline="0" spellChecking="false"/>
 			<itemData name="Error" defStyleNum="dsError" spellChecking="false"/>
 		</itemDatas>
 
