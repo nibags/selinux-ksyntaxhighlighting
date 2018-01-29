@@ -37,7 +37,7 @@
         kateversion="5.0"
 		section="Other"
 		extensions="*.fc;file_contexts;file_contexts.local;file_contexts.homedirs;file_contexts.template;homedir_template"
-		priority="7"
+		priority="6"
 		mimetype=""
 		author="Nibaldo González (nibgonz@gmail.com)"
 		license="MIT">

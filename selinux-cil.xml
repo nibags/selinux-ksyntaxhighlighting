@@ -43,7 +43,7 @@
 		kateversion="5.0"
 		section="Sources"
 		extensions="*.cil"
-		priority="8"
+		priority="9"
 		mimetype=""
 		author="Nibaldo González (nibgonz@gmail.com)"
 		license="MIT">
