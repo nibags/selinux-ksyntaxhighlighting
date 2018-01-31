@@ -925,7 +925,7 @@
 		<itemDatas>
 			<itemData name="Normal Text" defStyleNum="dsNormal" bold="0" spellChecking="false"/>
 			<itemData name="Comment"     defStyleNum="dsComment"/>
-			<itemData name="Text Quoted" defStyleNum="dsString" spellChecking="false"/>
+			<itemData name="Text Quoted" defStyleNum="dsString" italic="0" underline="0" spellChecking="false"/>
 			<itemData name="Path"        defStyleNum="dsNormal" italic="0" underline="0" spellChecking="false"/>
 
 			<itemData name="Statements"                defStyleNum="dsKeyword"      bold="1" italic="0" underline="0" spellChecking="false"/>
