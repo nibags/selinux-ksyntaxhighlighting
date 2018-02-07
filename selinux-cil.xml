@@ -631,6 +631,7 @@
 			<item>nilfs2</item>
 			<item>nfs</item>
 			<item>nfs4</item>
+			<item>ntfs</item>
 			<item>ntfs-3g</item>
 			<item>qnx4</item>
 			<item>qnx6</item>
