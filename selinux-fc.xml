@@ -190,24 +190,24 @@
 		<itemDatas>
 			<itemData name="Normal Text" defStyleNum="dsNormal"   spellChecking="false"/>
 			<itemData name="Comment"     defStyleNum="dsComment"/>
-			<itemData name="Text Quoted" defStyleNum="dsString"   italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Path"        defStyleNum="dsNormal"   italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Text Quoted" defStyleNum="dsString"   spellChecking="false"/>
+			<itemData name="Path"        defStyleNum="dsNormal"   spellChecking="false"/>
 			<itemData name="Variable"    defStyleNum="dsVariable" spellChecking="false"/>
 
-			<itemData name="File Type"      defStyleNum="dsKeyword" bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Keywords"       defStyleNum="dsKeyword" bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Other Keywords" defStyleNum="dsNormal"           italic="1" underline="0" spellChecking="false"/>
+			<itemData name="File Type"      defStyleNum="dsKeyword" spellChecking="false"/>
+			<itemData name="Keywords"       defStyleNum="dsKeyword" spellChecking="false"/>
+			<itemData name="Other Keywords" defStyleNum="dsNormal"  italic="1" spellChecking="false"/>
 			
-			<itemData name="User"  defStyleNum="dsOthers"         bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Role"  defStyleNum="dsDecVal"         bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Type"  defStyleNum="dsDataType"       bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Level" defStyleNum="dsVerbatimString" bold="0" italic="0" underline="0" spellChecking="false"/>
+			<itemData name="User"  defStyleNum="dsOthers"         spellChecking="false"/>
+			<itemData name="Role"  defStyleNum="dsDecVal"         spellChecking="false"/>
+			<itemData name="Type"  defStyleNum="dsDataType"       spellChecking="false"/>
+			<itemData name="Level" defStyleNum="dsVerbatimString" spellChecking="false"/>
 			
-			<itemData name="Special Char"          defStyleNum="dsSpecialChar"   italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Special Char 2"        defStyleNum="dsAnnotation"    italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Pattern Brackets"      defStyleNum="dsSpecialString" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Open Pattern Brackets" defStyleNum="dsSpecialString" italic="0" underline="1" spellChecking="false"/>
-			<itemData name="Escape Expression"     defStyleNum="dsSpecialChar"   italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Special Char"          defStyleNum="dsSpecialChar"   spellChecking="false"/>
+			<itemData name="Special Char 2"        defStyleNum="dsAnnotation"    spellChecking="false"/>
+			<itemData name="Pattern Brackets"      defStyleNum="dsSpecialString" spellChecking="false"/>
+			<itemData name="Open Pattern Brackets" defStyleNum="dsSpecialString" underline="1" spellChecking="false"/>
+			<itemData name="Escape Expression"     defStyleNum="dsSpecialChar"   spellChecking="false"/>
 			<itemData name="Error" defStyleNum="dsError" spellChecking="false"/>
 		</itemDatas>
 

@@ -7,7 +7,7 @@
 ]>
 
 <!--
-  SELinux CIL (Common Interface Language) Policy Syntax Highlighting Definition 
+  SELinux CIL (Common Interface Language) Policy Syntax Highlighting Definition
   for the KDE's KSyntaxHighlighting Framework.
   ==========================================================================================
    NOTE: Part of this file (the highlighting of brackets) is based on the Scheme XML file, 
@@ -631,7 +631,6 @@
 			<item>nilfs2</item>
 			<item>nfs</item>
 			<item>nfs4</item>
-			<item>ntfs</item>
 			<item>ntfs-3g</item>
 			<item>qnx4</item>
 			<item>qnx6</item>
@@ -924,42 +923,42 @@
 		</contexts>
 
 		<itemDatas>
-			<itemData name="Normal Text" defStyleNum="dsNormal" bold="0" spellChecking="false"/>
+			<itemData name="Normal Text" defStyleNum="dsNormal" spellChecking="false"/>
 			<itemData name="Comment"     defStyleNum="dsComment"/>
-			<itemData name="Text Quoted" defStyleNum="dsString" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Path"        defStyleNum="dsNormal" italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Text Quoted" defStyleNum="dsString" spellChecking="false"/>
+			<itemData name="Path"        defStyleNum="dsNormal" spellChecking="false"/>
 
-			<itemData name="Statements"                defStyleNum="dsKeyword"      bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Type Statements"           defStyleNum="dsFunction"     bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Policy Config. Statements" defStyleNum="dsPreprocessor" bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Access Keys"               defStyleNum="dsWarning"      bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Expression Keys"           defStyleNum="dsVariable"     bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Type Name"                 defStyleNum="dsDataType"     bold="1" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Booleans"                  defStyleNum="dsExtension"    bold="1" italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Statements"                defStyleNum="dsKeyword"      bold="1" spellChecking="false"/>
+			<itemData name="Type Statements"           defStyleNum="dsFunction"     bold="1" spellChecking="false"/>
+			<itemData name="Policy Config. Statements" defStyleNum="dsPreprocessor" bold="1" spellChecking="false"/>
+			<itemData name="Access Keys"               defStyleNum="dsWarning"      bold="1" spellChecking="false"/>
+			<itemData name="Expression Keys"           defStyleNum="dsVariable"     bold="1" spellChecking="false"/>
+			<itemData name="Type Name"                 defStyleNum="dsDataType"     bold="1" spellChecking="false"/>
+			<itemData name="Booleans"                  defStyleNum="dsExtension"    bold="1" spellChecking="false"/>
 
-			<itemData name="Types"          defStyleNum="dsDataType"       bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Special Keys"   defStyleNum="dsOthers"         bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Permissions"    defStyleNum="dsVerbatimString" bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="File Contexts"  defStyleNum="dsSpecialString"  bold="0" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Other Keywords" defStyleNum="dsNormal"         bold="0" italic="1" underline="0" spellChecking="false"/>
+			<itemData name="Types"          defStyleNum="dsDataType"       spellChecking="false"/>
+			<itemData name="Special Keys"   defStyleNum="dsOthers"         spellChecking="false"/>
+			<itemData name="Permissions"    defStyleNum="dsVerbatimString" spellChecking="false"/>
+			<itemData name="File Contexts"  defStyleNum="dsSpecialString"  spellChecking="false"/>
+			<itemData name="Other Keywords" defStyleNum="dsNormal"         italic="1" spellChecking="false"/>
 
 			<itemData name="IP Address" defStyleNum="dsFloat"  spellChecking="false"/>
 			<itemData name="Number"     defStyleNum="dsDecVal" spellChecking="false"/>
 			<itemData name="Octal"      defStyleNum="dsBaseN"  spellChecking="false"/>
 			<itemData name="Hex"        defStyleNum="dsBaseN"  spellChecking="false"/>
 	
-			<itemData name="Brackets1" defStyleNum="dsNormal" color="#ff0000" selColor="#000000" bold="1" italic="0"/>
-			<itemData name="Brackets2" defStyleNum="dsNormal" color="#ff8800" selColor="#000000" bold="1" italic="0"/>
-			<itemData name="Brackets3" defStyleNum="dsNormal" color="#888800" selColor="#000000" bold="1" italic="0"/>
-			<itemData name="Brackets4" defStyleNum="dsNormal" color="#008800" selColor="#000000" bold="1" italic="0"/>
-			<itemData name="Brackets5" defStyleNum="dsNormal" color="#000088" selColor="#000000" bold="1" italic="0"/>
-			<itemData name="Brackets6" defStyleNum="dsNormal" color="#880088" selColor="#000000" bold="1" italic="0"/>
+			<itemData name="Brackets1" defStyleNum="dsNormal" color="#ff0000" bold="1" />
+			<itemData name="Brackets2" defStyleNum="dsNormal" color="#ff8800" bold="1" />
+			<itemData name="Brackets3" defStyleNum="dsNormal" color="#888800" bold="1" />
+			<itemData name="Brackets4" defStyleNum="dsNormal" color="#008800" bold="1" />
+			<itemData name="Brackets5" defStyleNum="dsNormal" color="#000088" bold="1" />
+			<itemData name="Brackets6" defStyleNum="dsNormal" color="#880088" bold="1" />
 
-			<itemData name="Special Char"          defStyleNum="dsSpecialChar"   italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Special Char 2"        defStyleNum="dsAnnotation"    italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Pattern Brackets"      defStyleNum="dsSpecialString" italic="0" underline="0" spellChecking="false"/>
-			<itemData name="Open Pattern Brackets" defStyleNum="dsSpecialString" italic="0" underline="1" spellChecking="false"/>
-			<itemData name="Escape Expression"     defStyleNum="dsSpecialChar"   italic="0" underline="0" spellChecking="false"/>
+			<itemData name="Special Char"          defStyleNum="dsSpecialChar"   spellChecking="false"/>
+			<itemData name="Special Char 2"        defStyleNum="dsAnnotation"    spellChecking="false"/>
+			<itemData name="Pattern Brackets"      defStyleNum="dsSpecialString" spellChecking="false"/>
+			<itemData name="Open Pattern Brackets" defStyleNum="dsSpecialString" underline="1" spellChecking="false"/>
+			<itemData name="Escape Expression"     defStyleNum="dsSpecialChar"   spellChecking="false"/>
 			<itemData name="Error" defStyleNum="dsError" spellChecking="false"/>
 		</itemDatas>
 
