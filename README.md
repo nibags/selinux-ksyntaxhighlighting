@@ -2,17 +2,16 @@
 
 **Author:** Nibaldo González (<nibgonz@gmail.com>) (Valparaíso, Chile)
 
-**Last Change:** February 2018
+**Last Change:** March 2018
 
 ```
 These files are part of the KDE's KSyntaxHighlighting Framework. 
-Included in KDE Frameworks 5.44.0+. 
+Included in KDE Frameworks 5.44.0+ (version 1). 
 ```
 
 ## Description:
 
-Add syntax highlighting to KDE text editors (as Kate, KWrite, KDevelop 
-or any application that uses the KSyntaxHighlighting/KTextEditor Framework) for:
+Add syntax highlighting to KDE text editors (as Kate, KWrite, KDevelop, etc.) for:
 
 * SELinux CIL Policies (`selinux-cil.xml`).
 * SELinux File Labeling Policies (`selinux-fc.xml`).
@@ -34,6 +33,8 @@ For more details of KSyntaxHighlighting Framework, visit:
 
 
 ## Installation:
+
+**NOTE:** KDE Frameworks 5.44.0 includes version 1 of the files. 
 
 Copy the `.xml` files to `$HOME/.local/share/org.kde.syntax-highlighting/syntax/` (for local user) or `/usr/share/org.kde.syntax-highlighting/syntax/` (for all users).
 
