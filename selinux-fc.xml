@@ -28,14 +28,15 @@
   ==========================================================================================
 
   Change log:
-    * Version 2 [15-Mar-2018, by Nibaldo G.]:
+    * Version 1 [15-Mar-2018, by Nibaldo G.]:
 		- Small optimizations. Improvements in paths & PCRE Regex highlighting.
   	* Version 1 [26-Jan-2018, by Nibaldo González]:
 		- Initial version.
 -->
 
+<!-- This version (2) has not yet been published, so it remains as version 1 -->
 <language name="SELinux File Contexts"
-		version="2"
+		version="1"
         kateversion="5.0"
 		section="Other"
 		extensions="*.fc;file_contexts;file_contexts.local;file_contexts.homedirs;file_contexts.template;homedir_template"

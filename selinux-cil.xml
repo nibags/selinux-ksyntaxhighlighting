@@ -40,8 +40,9 @@
 		- Initial version.
 -->
 
+   <!-- This version (2) has not yet been published, so it remains as version 1 -->
 <language name="SELinux CIL Policy"
-		version="2"
+		version="1"
 		kateversion="5.0"
 		section="Sources"
 		extensions="*.cil"
