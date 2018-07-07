@@ -36,7 +36,7 @@
 
 <!-- This version (2) has not yet been published, so it remains as version 1 -->
 <language name="SELinux File Contexts"
-		version="2"
+		version="1"
         kateversion="5.0"
 		section="Other"
 		extensions="*.fc;file_contexts;file_contexts.local;file_contexts.homedirs;file_contexts.template;homedir_template"
@@ -91,7 +91,6 @@
 
 			<context name="_comment" attribute="Comment" lineEndContext="#pop">
 				<DetectSpaces />
-				<LineContinue context="#pop" attribute="Comment"/>
 				<IncludeRules context="##Alerts"/>
 				<IncludeRules context="##Modelines"/>
 				<RegExpr context="#stay" attribute="Comment URL" String="\bhttps?://[^\s&lt;&gt;&quot;&apos;`]*[^\s&lt;&gt;&quot;&apos;`\}\)\]\.,;\|]" />

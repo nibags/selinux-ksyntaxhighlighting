@@ -42,7 +42,7 @@
 
    <!-- This version (2) has not yet been published, so it remains as version 1 -->
 <language name="SELinux CIL Policy"
-		version="2"
+		version="1"
 		kateversion="5.0"
 		section="Sources"
 		extensions="*.cil"
@@ -668,26 +668,21 @@
 				<RegExpr context="#stay" attribute="IP Address" String="\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"/>
 				<!-- IPv6 -->
 				<RegExpr context="#stay" attribute="IP Address" String="\b([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:"/>
-				
-				<!--<RegExpr context="#stay" attribute="Normal Text" String="(\b&identifier;)?(\.&identifier;)+(?=[\s\(\)]|$)"/>-->
+				<HlCOct context="#stay" attribute="Octal"/>
+        		<HlCHex context="#stay" attribute="Hex"/>
+				<RegExpr context="#stay" attribute="Binary" String="\b0b[01]+(ul{0,2}|l{1,2}u?|lul)?(?=([\s\(\)]|$))" insensitive="true"/>
+				<RegExpr context="#stay" attribute="Decimal" String="\b((0|[1-9]\d*)(ul{0,2}|l{1,2}u?|lul)|\d+)(?=([\s\(\)]|$))" insensitive="true"/>
+
+				<RegExpr context="#stay" attribute="Normal Text" String="(\b&identifier;)?(\.&identifier;)+(?=([\s\(\)]|$))"/>
 				<DetectChar context="#stay" attribute="Special Char" char="*"/>
 				<HlCStringChar context="#stay" attribute="Escape Char"/>
 				<!-- File contexts: user_u:role_r:type_t:s0:c0 -->
 				<RegExpr context="#stay" attribute="File Contexts" String="\b[^\s:\(\)&quot;]+(:[^\s:\(\)&quot;]+){2}(:[^\s:\(\)&quot;]+)*(?=([^&symbol;]|\s|$))"/>
-				
-				<RegExpr context="#stay" attribute="Normal Text" String="(\b&identifier;(\.&identifier;)*|(\.&identifier;)+)(?=[^&symbol;]|\s|$)"/>
-				<RegExpr context="#stay" attribute="Binary" String="\b0b[01]+(?=([\s\(\)]|$))"/>
-				<HlCOct context="#stay" attribute="Octal"/>
-        		<HlCHex context="#stay" attribute="Hex"/>
-				<Float context="#stay" attribute="Float"/>
-				<Int context="#stay" attribute="Decimal"/>
-				<!--<RegExpr context="#stay" attribute="Decimal" String="\b\d+(?=([\s\(\)]|$))" insensitive="true"/>
-				<RegExpr context="#stay" attribute="Float" String="(\.\d+|\b\d+(\.\d+)?)(e[\+\-]?\d+)?[fl]?(?=([\s\(\)]|$))" insensitive="true"/>-->
+				<RegExpr context="#stay" attribute="Float" String="((\.\d+|\b\d+\.\d*)(e[\+\-]?\d*)?|(\b\d+e[\+\-]?\d*))[fl]?(?=([\s\(\)]|$))" insensitive="true"/>
 			</context>
 
 			<context name="_comment" attribute="Comment" lineEndContext="#pop">
 				<DetectSpaces />
-				<LineContinue context="#pop" attribute="Comment"/>
 				<IncludeRules context="##Alerts"/>
 				<IncludeRules context="##Modelines"/>
 				<RegExpr context="#stay" attribute="Comment URL" String="\bhttps?://[^\s&lt;&gt;&quot;&apos;`]*[^\s&lt;&gt;&quot;&apos;`\}\)\]\.,;\|]" />
