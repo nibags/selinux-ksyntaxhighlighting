@@ -56,6 +56,14 @@ ifdef(`init_systemd',`
 	/run/tmpfiles\.d/kmod\.conf  --  gen_context(system_u:object_r:kmod_tmpfiles_conf_t,s0)
 ')
 
+# Android file contexts
+
+android.hardware.light::ILight  u:object_r:hal_light_hwservice:s0
+android.hardware.nfc::INfc      u:object_r:hal_nfc_hwservice:s0
+*                               u:object_r:default_android_hwservice:s0
+ro.boot.bootloader              u:object_r:exported2_default_prop:s0 exact string
+sys.usb.mtp.device_type         u:object_r:exported2_system_prop:s0 exact int
+
 # Tests
 
 # Variables
