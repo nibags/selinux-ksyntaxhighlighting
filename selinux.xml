@@ -46,26 +46,17 @@
     https://github.com/SELinuxProject/selinux/blob/master/checkpolicy/policy_scan.l
   More details:
     https://selinuxproject.org/page/PolicyLanguage#Kernel_Policy_Language
-
-  SELinux Policy Language Files:
-    - Monolithic Policy (policy.conf) & Base Policy (base.conf).
-    - Module Policy Sources: Type Enforcement (*.te), Interface Files (*.if) &
-        M4 Macros of Reference Policy (*.spt).
-    - Common Policy Build Files: policy_capabilities, attributes, global_macros,
-        mls_macros, te_macros, mls, mcs, users, roles, initial_sids, access_vectors,
-        security_classes, initial_sid_contexts fs_use, genfs_contexts, port_contexts
-    - Common Policy Config. Files (also see "selinux-fc.xml"): seapp_contexts
+    https://selinuxproject.org/page/Category:Notebook
 
   NOTE:
-    - This file depends on "selinux-cil.xml" and "selinux-fc.xml":
-        - Files with definition of file contexts are highlighted by "selinux-fc.xml".
-        - CIL policies are highlighted by "selinux-cil.xml".
-    - Only the most relevant build files and conf. files are highlighted by
-      default, since some have very generic names.
+  - This file depends on "selinux-cil.xml" and "selinux-fc.xml".
+  - Only the most relevant policy build files and config. files are highlighted by
+    default, since some have very generic names. Files with definition of
+    file contexts are highlighted by "selinux-fc.xml".
 
   Change log:
 	* Version 1 [23-Aug-2018, by Nibaldo González]:
-		- Initial version. Syntax based in checkpolicy v2.8.
+		- Initial version. Syntax based on checkpolicy v2.8.
 -->
 
 <language name="SELinux Policy"
@@ -407,8 +398,6 @@
 		<item>execute_no_trans</item>
 		<item>expand</item>
 		<item>export</item>
-		<item>flow_in</item>
-		<item>flow_out</item>
 		<item>force_cursor</item>
 		<item>fork</item>
 		<item>forward_in</item>
@@ -416,7 +405,6 @@
 		<item>fowner</item>
 		<item>freeze</item>
 		<item>fsetid</item>
-		<item>get_param</item>
 		<item>get_property</item>
 		<item>get_value</item>
 		<item>getattr</item>
@@ -457,8 +445,8 @@
 		<item>load_module</item>
 		<item>load_policy</item>
 		<item>lock</item>
-		<item>mac_admin</item>
-		<item>mac_override</item>
+		<item>mac_admin</item> <!-- Unused by SELinux -->
+		<item>mac_override</item> <!-- Unused by SELinux -->
 		<item>manage</item>
 		<item>manage_subnet</item>
 		<item>map</item>
@@ -535,7 +523,6 @@
 		<item>send_msg</item>
 		<item>sendto</item>
 		<item>set_context_mgr</item>
-		<item>set_param</item>
 		<item>set_property</item>
 		<item>set_value</item>
 		<item>setattr</item>
@@ -611,13 +598,13 @@
 		<item>view</item>
 		<item>wake_alarm</item>
 		<item>write</item>
+		<!-- Deprecated: flow_in, flow_out, get_param, set_param -->
 	</list>
 
 	<!-- Additional AV Permissions for Android.
-	     Permissions of keystore_key class:
-	       https://android.googlesource.com/platform/system/security/+/master/keystore/permissions.cpp
 	     Permissions & Classes:
 	       https://android.googlesource.com/platform/system/sepolicy/+/master/private/access_vectors
+	       https://android.googlesource.com/platform/system/security/+/master/keystore/permissions.cpp
 	     More details:
 	       https://selinuxproject.org/page/NB_SEforAndroid_1#Android_Classes_and_Permissions -->
 	<list name="av_permissions_android">
@@ -626,8 +613,6 @@
 		<item>closeDecryptSession</item>
 		<item>consumeRights</item>
 		<item>decrypt</item>
-		<item>dump_backtrace</item>
-		<item>dump_tombstone</item>
 		<item>duplicate</item>
 		<item>exist</item>
 		<item>finalizeDecryptUnit</item>
@@ -643,17 +628,12 @@
 		<item>password</item>
 		<item>pread</item>
 		<item>reset</item>
-		<item>saw</item>
 		<item>set</item>
 		<item>setPlaybackStatus</item>
 		<item>sign</item>
 		<item>unlock</item>
 		<item>user_changed</item>
 		<item>verify</item>
-		<!-- Old: (keystore_key) reset_uid, sync_uid, password_uid, zero, test;
-		     (zygote) specifyids, specifyrlimits, specifyinvokewith, specifyseinfo -->
-		<!-- Also (duplicated): add, call, delete, impersonate, exist
-		     insert, lock, set_context_mgr, transfer -->
 	</list>
 
 	<!-- FS & VFS Types -->
@@ -904,6 +884,7 @@
 			<RegExpr context="_input_sel" attribute="Input Selector" String="\b&identifier;(?=\s*\=\s*[^\s\=,;\}\)\]#!\^:])"/>
 
 			<!-- Keywords & Stamtements -->
+			<!-- FIXME: "range_transition" can highlight levels/ranges as file contexts by mistake. -->
 			<keyword context="#stay" attribute="Booleans" String="booleans"/>
 			<keyword context="#stay" attribute="Special Keys" String="self"/>
 			<keyword context="_statement_policycap" attribute="Policy Config. Statements" String="statements_policycap"/>
@@ -915,7 +896,6 @@
 			<keyword context="_statement_default_range" attribute="Statements" String="statements_default_range"/>
 			<keyword context="_statement_cexpr" attribute="Statements" String="statements_cexpr"/>
 			<keyword context="_find_identifier" attribute="Statements" String="statements_def"/>
-
 			<keyword context="#stay" attribute="Statements" String="statements"/>
 			<keyword context="#stay" attribute="Statements" String="statements_fc"/>
 			<keyword context="#stay" attribute="Statements" String="keywords"/>
