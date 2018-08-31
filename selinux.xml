@@ -49,7 +49,7 @@
     https://selinuxproject.org/page/Category:Notebook
 
   NOTE:
-  - This file depends on "selinux-cil.xml" and "selinux-fc.xml".
+  - This file is required by "selinux-cil.xml" and "selinux-fc.xml".
   - Only the most relevant policy build files and config. files are highlighted by
     default, since some have very generic names. Files with definition of
     file contexts are highlighted by "selinux-fc.xml".
