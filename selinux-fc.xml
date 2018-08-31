@@ -42,7 +42,7 @@
     - Policy Build Files: initial_sid_contexts, genfs_contexts, fs_use
 
   Change log:
-	* Version 2 [23-Aug-2018]:
+	* Version 2 [28-Aug-2018]:
 		- Some improvements. RegExp and some rules are moved to "selinux.xml".
 		- Add statements keywords that use file contexts.
 	* Version 1 [26-Jan-2018, by Nibaldo González]:
@@ -64,6 +64,7 @@
 		<contexts>
 
 			<context name="_normal" attribute="Normal Text" lineEndContext="#stay">
+				<IncludeRules context="_m4_preprocessor##SELinux Policy"/>
 				<IncludeRules context="_find_comments##SELinux Policy"/>
 				<RegExpr context="#stay" attribute="File Type" String="(\s|^)\-[bcdpls\-](?=\s|$)"/>
 
@@ -71,17 +72,17 @@
 				<DetectChar context="_quoted" attribute="Text Quoted" char="&quot;"/>
 
 				<!-- Content Quoted (M4).
-				     NOTE: By default, the following quotes are highlighted: `'
+				     NOTE: The default quotes (`text') are highlighted,
 				     but another type of quotation mark can be used. -->
 				<IncludeRules context="_m4_string_simple##SELinux Policy"/> <!-- `simple text' -->
 				<IncludeRules context="_m4_quotes##SELinux Policy"/>
 
-				<!-- File Contexts:  user:role:type:s0 -->
+				<!-- File Contexts:  user:role:type:s0:c0 -->
 				<RegExpr context="_fc_user" attribute="User" String="&startIdentifier;(?=(\s*:\s*&identifier;){2}(\s*:\s*&mlsLevel;(\s*\-\s*&mlsLevel;)?)?\b)"/>
 				<WordDetect context="#stay" attribute="Other Keywords" String="&lt;&lt;none&gt;&gt;"/>
 
 				<!-- Java-Language-Style Package Name & other Names, for SE Android (this avoid highlighting keywords) -->
-				<RegExpr context="#stay" attribute="Path" String="\.?[a-zA-Z]\w*((\.|::)\w+)+" firstNonSpace="true"/>
+				<RegExpr context="#stay" attribute="Path" String="\.?[a-zA-Z]\w*((\.|::)\w+)+(?=[^\(]|$)" firstNonSpace="true"/>
 
 				<!-- Functions -->
 				<DetectChar context="_parentheses_content" attribute="Normal Text" char="(" beginRegion="ParenthesesBlock"/>
@@ -107,13 +108,14 @@
 
 				<!-- Highlight only the statements that contain definition of file contexts -->
 				<IncludeRules context="_statements_file_contexts##SELinux Policy"/>
+				<RegExpr context="#stay" String="[a-zA-Z](\.?[\w\-]+)*"/>
 				<HlCHex context="#pop" attribute="Number"/>
 				<Int context="#pop" attribute="Number"/>
 			</context>
 
 			<context name="_parentheses_content" attribute="Normal Text" lineEndContext="#stay">
 				<DetectChar context="#pop" attribute="Normal Text" char=")" endRegion="ParenthesesBlock"/>
-				<!-- File Contexts:   (user:role:type,s0,c0) -->
+				<!-- File Contexts:  (user:role:type,s0) -->
 				<RegExpr context="_gen_context_fc_user" attribute="User" String="&startIdentifier;(\s*:\s*&identifier;){2}(\s*,\s*&identifier;)*\b" lookAhead="true"/>
 				<IncludeRules context="_normal"/>
 			</context>
@@ -123,13 +125,15 @@
 				<IncludeRules context="_regex##SELinux Policy"/>
 				<IncludeRules context="_variable"/>
 			</context>
-			<context name="_quoted" attribute="Text Quoted" lineEndContext="#stay">
+			<context name="_quoted" attribute="Text Quoted" lineEndContext="#pop">
 				<DetectChar context="#pop" attribute="Text Quoted" char="&quot;"/>
-				<IncludeRules context="_regex_quoted##SELinux Policy"/>
 				<IncludeRules context="_m4_special_arguments##SELinux Policy"/>
 				<IncludeRules context="_other_variable"/>
+				<IncludeRules context="_regex_quoted##SELinux Policy"/>
+				<RegExpr context="#stay" attribute="Text Quoted Open" String="[^\s&quot;\[\(\\](?=\s*$)"/>
 			</context>
 
+			<!-- Variables of "file_contexts", M4 & Refpolicy -->
 			<context name="_variable" attribute="Normal Text" lineEndContext="#stay">
 				<WordDetect context="#stay" attribute="Variable" String="HOME_DIR"/>
 				<WordDetect context="#stay" attribute="Variable" String="HOME_ROOT"/>
@@ -147,57 +151,116 @@
 
 			<!-- SELinux Security Contexts -->
 
+			<!-- User -->
 			<context name="_fc_user" attribute="User" lineEndContext="#pop">
 				<DetectChar context="#pop!_fc_role" attribute="Normal Text" char=":"/>
 			</context>
+			<!-- Role -->
 			<context name="_fc_role" attribute="Role" lineEndContext="#pop">
 				<DetectChar context="#pop!_fc_type" attribute="Normal Text" char=":"/>
 			</context>
-			<context name="_fc_type" attribute="Type" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop">
-				<RegExpr context="#pop!_fc_level" attribute="Type" String="\s*&identifier;(?=\s*:\s*&mlsLevel;)"/>
-				<RegExpr context="#pop" attribute="Type" String="\s*&identifier;"/>
+			<!-- Type Enforcement -->
+			<context name="_fc_type" attribute="Type Enforcement" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_after_fc">
+				<RegExpr context="#pop!_fc_mls" attribute="Type Enforcement" String="\s*&identifier;(?=\s*:\s*&mlsLevel;)"/> <!-- Find MLS/MCS -->
+				<RegExpr context="#pop" attribute="Type Enforcement" String="\s*&identifier;"/>
 			</context>
-			<context name="_fc_level" attribute="Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop">
-				<RegExpr context="#stay" attribute="Normal Text" String="\s*[:\-,\.]\s*(?=&simpleIdentifier;)"/>
-				<RegExpr context="#stay" attribute="Level" String="\$([1-9]\d*|[0#\*@]|\{([1-9]\d*|0)\})"/>
-				<RegExpr context="#stay" attribute="Level" String="\%\{[A-Za-z]\w*\}"/>
-				<RegExpr context="#stay" attribute="Level" String="\w+"/>
-				<DetectChar context="#stay" attribute="Level" char="-"/>
+
+			<!-- Start MLS/MCS -->
+			<context name="_fc_mls" attribute="MLS/MCS Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_after_fc">
+				<DetectChar context="#pop!_fc_find_level_range" attribute="Normal Text" char=":"/>
+				<DetectSpaces context="#stay" attribute="Normal Text"/>
+			</context>
+			<context name="_fc_find_level_range" attribute="MLS/MCS Level"
+			         lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_fc_level_range">
+				<DetectSpaces context="#stay" attribute="Normal Text"/>
+			</context>
+			<!-- MLS/MCS Range (Sensitivity:Category - Sensitivity:Category) -->
+			<!-- Sensitivity -->
+			<context name="_fc_level_range" attribute="MLS/MCS Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_after_fc">
+				<RegExpr context="#pop!_fc_level_range_cat" attribute="Normal Text" String="\s*:\s*(?=&identifier;)"/> <!-- Find Category -->
+				<RegExpr context="#pop!_fc_level" attribute="Normal Text" String="\s*\-\s*(?=&mlsLevel;)"/> <!-- Find Range -->
+				<IncludeRules context="_default_level"/>
+			</context>
+			<!-- Category -->
+			<context name="_fc_level_range_cat" attribute="MLS/MCS Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_after_fc">
+				<RegExpr context="#pop!_fc_level" attribute="Normal Text" String="\s*\-\s*(?=&mlsLevel;)"/> <!-- Find Range -->
+				<RegExpr context="#stay" attribute="Normal Text" String="\s*,\s*(?=&simpleIdentifier;)"/>
+				<IncludeRules context="_default_level"/>
+			</context>
+			<!-- MLS/MCS Level (Sensitivity:Category) -->
+			<!-- Sensitivity -->
+			<context name="_fc_level" attribute="MLS/MCS Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_after_fc">
+				<RegExpr context="#pop!_fc_level_cat" attribute="Normal Text" String="\s*:\s*(?=&identifier;)"/> <!-- Find Category -->
+				<IncludeRules context="_default_level"/>
+			</context>
+			<!-- Category -->
+			<context name="_fc_level_cat" attribute="MLS/MCS Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_after_fc">
+				<RegExpr context="#stay" attribute="Normal Text" String="\s*,\s*(?=&simpleIdentifier;)"/>
+				<IncludeRules context="_default_level"/>
+			</context>
+
+			<context name="_default_level" attribute="Normal Text" lineEndContext="#pop">
+				<RegExpr context="#stay" attribute="Normal Text" String="\s*\.\s*(?=&charIden;)"/>
+				<DetectChar  context="_default_level_arg" attribute="MLS/MCS Level" char="$"/>
+				<DetectChar  context="_default_level_var" attribute="MLS/MCS Level" char="%"/>
+				<RegExpr context="#stay" attribute="MLS/MCS Level" String="\w+"/>
+				<DetectChar context="#stay" attribute="MLS/MCS Level" char="-"/>
+			</context>
+			<context name="_default_level_arg" attribute="MLS/MCS Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop">
+				<!-- M4 Args. It is not exact -->
+				<Int context="#pop" attribute="MLS/MCS Level"/>
+				<AnyChar context="#pop" attribute="MLS/MCS Level" String="#*@"/>
+				<RegExpr context="#pop" attribute="MLS/MCS Level" String="\{\d+\}"/>
+			</context>
+			<context name="_default_level_var" attribute="MLS/MCS Level" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop">
+				<RegExpr context="#pop" attribute="MLS/MCS Level" String="{[A-Za-z]\w*\}"/>
+			</context>
+
+			<context name="_after_fc" attribute="Normal Text" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop">
+				<RegExpr context="#stay" attribute="Normal Text" String="\s*:\s*\w*"/>
+				<RegExpr context="#stay" attribute="Normal Text" String="[:\.\w]+"/>
 			</context>
 
 			<!-- Within function "gen_context" (highlight variables and M4 args.) -->
+			<!-- User -->
 			<context name="_gen_context_fc_user" attribute="User" lineEndContext="#pop">
 				<DetectChar context="#pop!_gen_context_role" attribute="Normal Text" char=":"/>
 				<IncludeRules context="_fc_variable"/>
 			</context>
+			<!-- Role -->
 			<context name="_gen_context_role" attribute="Role" lineEndContext="#pop">
 				<DetectChar context="#pop!_before_gen_context_type" attribute="Normal Text" char=":"/>
 				<IncludeRules context="_fc_variable"/>
 			</context>
-			<context name="_before_gen_context_type" attribute="Type" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_gen_context_type">
-				<DetectSpaces context="#stay"/>
+			<!-- Type Enforcement -->
+			<context name="_before_gen_context_type" attribute="Type Enforcement"
+			         lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop!_gen_context_type">
+				<DetectSpaces context="#stay" attribute="Normal Text"/>
 			</context>
-			<context name="_gen_context_type" attribute="Type" lineEndContext="#pop!_fc_find_comma" fallthrough="true" fallthroughContext="#pop!_fc_find_comma">
-				<RegExpr context="#pop!_gen_context_level" attribute="Normal Text" String="\s*:\s*(?=&identifier;)"/>
+			<context name="_gen_context_type" attribute="Type Enforcement"
+			         lineEndContext="#pop!_fc_find_comma" fallthrough="true" fallthroughContext="#pop!_fc_find_comma">
+				<RegExpr context="#pop!_fc_level_range" attribute="Normal Text" String="\s*:\s*(?=&identifier;)"/> <!-- Find MLS/MCS -->
 				<IncludeRules context="_fc_variable"/>
-				<RegExpr context="#stay" attribute="Type" String="[\w\-]+"/>
+				<RegExpr context="#stay" attribute="Type Enforcement" String="[\w\-]+"/>
 			</context>
-			<context name="_gen_context_level" attribute="Level" lineEndContext="#stay" fallthrough="true" fallthroughContext="#pop">
-				<RegExpr context="#stay" attribute="Normal Text" String="\-\s*(?=&simpleIdentifier;)"/>
-				<IncludeRules context="_fc_variable"/>
-				<RegExpr context="#stay" attribute="Level" String="\w+"/>
-				<DetectChar context="#stay" attribute="Level" char="-"/>
-				<AnyChar context="#stay" attribute="Normal Text" String=":.,"/>
-				<DetectSpaces />
-			</context>
-
+			<!-- Comma after file contexts -->
 			<context name="_fc_find_comma" attribute="Normal Text" lineEndContext="#stay" fallthrough="true" fallthroughContext="#pop">
 				<DetectChar context="#pop!_fc_after_comma" attribute="Normal Text" char=","/>
 				<RegExpr context="#pop" String="\s*[^,\s]" lookAhead="true"/>
-				<DetectSpaces/>
+				<DetectSpaces />
 			</context>
-			<context name="_fc_after_comma" attribute="Normal Text" lineEndContext="#stay" fallthrough="true" fallthroughContext="#pop!_gen_context_level">
-				<DetectSpaces/>
+			<context name="_fc_after_comma" attribute="Normal Text"
+			         lineEndContext="#stay" fallthrough="true" fallthroughContext="#pop!_gen_context_level">
+				<DetectSpaces context="#stay"/>
+			</context>
+			<!-- MLS/MCS -->
+			<context name="_gen_context_level" attribute="MLS/MCS Level" lineEndContext="#stay" fallthrough="true" fallthroughContext="#pop">
+				<RegExpr context="#stay" attribute="Normal Text" String="\-\s*(?=&simpleIdentifier;)"/>
+				<IncludeRules context="_fc_variable"/>
+				<RegExpr context="#stay" attribute="MLS/MCS Level" String="\w+"/>
+				<DetectChar context="#stay" attribute="MLS/MCS Level" char="-"/>
+				<AnyChar context="#stay" attribute="Normal Text" String=":.,"/>
+				<DetectSpaces />
 			</context>
 
 		</contexts>
@@ -209,15 +272,16 @@
 			<itemData name="Variable"    defStyleNum="dsVariable" spellChecking="false"/>
 			<itemData name="File Type"   defStyleNum="dsKeyword"  spellChecking="false"/>
 
-			<itemData name="User"  defStyleNum="dsOthers"         spellChecking="false"/>
-			<itemData name="Role"  defStyleNum="dsDecVal"         spellChecking="false"/>
-			<itemData name="Type"  defStyleNum="dsDataType"       spellChecking="false"/>
-			<itemData name="Level" defStyleNum="dsVerbatimString" spellChecking="false"/>
+			<itemData name="User"             defStyleNum="dsOthers"         spellChecking="false"/>
+			<itemData name="Role"             defStyleNum="dsDecVal"         spellChecking="false"/>
+			<itemData name="Type Enforcement" defStyleNum="dsDataType"       spellChecking="false"/>
+			<itemData name="MLS/MCS Level"    defStyleNum="dsVerbatimString" spellChecking="false"/>
 
-			<itemData name="Other Keywords" defStyleNum="dsNormal"   italic="1" spellChecking="false"/>
-			<itemData name="Function"       defStyleNum="dsNormal"   bold="1" spellChecking="false"/>
-			<itemData name="Symbol"         defStyleNum="dsOperator" spellChecking="false"/>
-			<itemData name="Number"         defStyleNum="dsComment"  spellChecking="false"/>
+			<itemData name="Other Keywords"   defStyleNum="dsNormal"   italic="1" spellChecking="false"/>
+			<itemData name="Function"         defStyleNum="dsNormal"   bold="1" spellChecking="false"/>
+			<itemData name="Symbol"           defStyleNum="dsOperator" spellChecking="false"/>
+			<itemData name="Number"           defStyleNum="dsComment"  spellChecking="false"/>
+			<itemData name="Text Quoted Open" defStyleNum="dsString"   underline="1" spellChecking="false"/>
 		</itemDatas>
 
 	</highlighting>
