@@ -44,7 +44,9 @@ For more details of KSyntaxHighlighting Framework, visit:
 
 ## Installation:
 
-If you do not have the latest version of KDE Frameworks, you can manually install the latest `selinux.xml`, `selinux-cil.xml` & `selinux-fc.xml` files.
+**Important:** `selinux-cil.xml` & `selinux-fc.xml` depend on `selinux.xml`. To avoid problems, do not install the files separately, but the 3 together.
+
+If you do not have the latest version of KDE Frameworks, you can manually install the latest `.xml` files.
 
 Copy the `.xml` files to `$HOME/.local/share/org.kde.syntax-highlighting/syntax/` (for local user) or `/usr/share/org.kde.syntax-highlighting/syntax/` (for all users).
 
