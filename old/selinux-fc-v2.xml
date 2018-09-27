@@ -43,7 +43,7 @@
 
   Change log:
 	* Version 3 [09-Sep-2018]:
-		- Update itemData's style for the new Solarized color schemes.
+		- Update itemData's style for the new Solarized schema.
 	* Version 2 [28-Aug-2018]:
 		- Some improvements. RegExp and some rules are moved to "selinux.xml".
 		- Add statements keywords that use file contexts.

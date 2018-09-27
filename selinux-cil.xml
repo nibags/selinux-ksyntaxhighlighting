@@ -654,6 +654,7 @@
 			<itemData name="Number"      defStyleNum="dsDecVal" spellChecking="false"/>
 			<itemData name="Hexadecimal" defStyleNum="dsBaseN"  spellChecking="false"/>
 
+			<!-- Obtained from "scheme.xml" -->
 			<itemData name="Brackets1" defStyleNum="dsNormal" color="#ff0000" bold="1" />
 			<itemData name="Brackets2" defStyleNum="dsNormal" color="#ff8800" bold="1" />
 			<itemData name="Brackets3" defStyleNum="dsNormal" color="#888800" bold="1" />

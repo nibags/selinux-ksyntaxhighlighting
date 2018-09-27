@@ -2,18 +2,27 @@
 
 **Author:** Nibaldo González (<nibgonz@gmail.com>)
 
-**Last Change:** August 2018
+**Last Change:** September 2018
 
 ```
 These files are part of the KDE's KSyntaxHighlighting Framework. 
-KDE Frameworks 5.44.0 includes version 1 of "selinux-cil.xml" & "selinux-fc.xml". 
 ```
+**Last version:**
+* `selinux.xml`: Version 2 is included in KDE Frameworks 5.51.0+.
+* `selinux-cil.xml`: Version 2 is included in KDE Frameworks 5.50.0+.
+* `selinux-fc.xml`: Version 3 is included in KDE Frameworks 5.51.0+.
+
+**Old versions:**
+* `selinux.xml`: Version 1 is included in KDE Frameworks 5.50.0+
+* `selinux-cil.xml`: Version 1 is included in KDE Frameworks 5.44.0+.
+* `selinux-fc.xml`: Version 2 is included in KDE Frameworks 5.50.0+ and version 1 in KDE Frameworks 5.44.0+.
+
 
 ## Description:
 
-Add syntax highlighting to KDE text editors (as Kate, KWrite, KDevelop, etc.) for:
+Add syntax highlighting to KDE text editors (as Kate, KWrite, KDevelop or any application that uses the KSyntaxHighlighting or KTextEditor Framework) for:
 
-* SELinux Policy (`selinux.xml`).
+* SELinux Kernel Policy Language (`selinux.xml`).
 * SELinux CIL Policies (`selinux-cil.xml`).
 * SELinux File Contexts (`selinux-fc.xml`).
 
@@ -35,6 +44,8 @@ For more details of KSyntaxHighlighting Framework, visit:
 
 ## Installation:
 
+If you do not have the latest version of KDE Frameworks, you can manually install the latest `selinux.xml`, `selinux-cil.xml` & `selinux-fc.xml` files.
+
 Copy the `.xml` files to `$HOME/.local/share/org.kde.syntax-highlighting/syntax/` (for local user) or `/usr/share/org.kde.syntax-highlighting/syntax/` (for all users).
 
 Ex.: 
@@ -51,9 +62,18 @@ sudo cp ./selinux{,-cil,-fc}.xml /usr/share/org.kde.syntax-highlighting/syntax/
 
 ## Usage:
 
-You can force the syntax highlighting by writing a comment with: 
+Syntax highlighting of SELinux policies (`selinux.xml`) is automatically applied to named files: `*.te`, `*.if`, `*.spt`, `policy.conf`, `access_vectors`, `mls`, `mcs` `mls_macros`, `te_macros` `policy_capabilities` `seapp_contexts` & `port_contexts`.
+
+Syntax highlighting of SELinux file contexts is applied to named files: `*.fc`, `file_contexts`, `file_contexts_*`, `file_contexts.local`, `file_contexts.homedirs`, `file_contexts.template`, `homedir_template`, `property_contexts`, `service_contexts`, `hwservice_contexts`, `initial_sid_contexts`, `genfs_contexts` & `fs_use`.
+
+Syntax highlighting of SELinux CIL policies is applied to files with `.cil` extension.
+
+Not all SELinux configuration & build files are highlighted by default, since some have generic names.
+
+You can also force the syntax highlighting by writing a comment with: 
 ```
-kate: syntax SELinux Policy
-kate: syntax SELinux CIL Policy
-kate: syntax SELinux File Contexts
+kate: syntax SELinux Policy;
+kate: syntax SELinux CIL Policy;
+kate: syntax SELinux File Contexts;
 ```
+<!-- kate: syntax Markdown; -->
