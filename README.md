@@ -1,5 +1,7 @@
 # SELinux Policies Syntax Highlighting Definition for Kate
 
+![Example of SELinux policies (TE module & CIL policy) syntax highlighting](https://raw.githubusercontent.com/nibags/selinux-ksyntaxhighlighting/master/test/images/selinux-preview.png)
+
 **Author:** Nibaldo González (<nibgonz@gmail.com>)
 
 **Last Change:** September 2018
