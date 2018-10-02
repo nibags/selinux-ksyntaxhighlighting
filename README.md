@@ -9,16 +9,6 @@
 ```
 These files are part of the KDE's KSyntaxHighlighting Framework. 
 ```
-**Last version:**
-* `selinux.xml`: Version 2 is included in KDE Frameworks 5.51.0+.
-* `selinux-cil.xml`: Version 2 is included in KDE Frameworks 5.50.0+.
-* `selinux-fc.xml`: Version 3 is included in KDE Frameworks 5.51.0+.
-
-**Old versions:**
-* `selinux.xml`: Version 1 is included in KDE Frameworks 5.50.0+
-* `selinux-cil.xml`: Version 1 is included in KDE Frameworks 5.44.0+.
-* `selinux-fc.xml`: Version 2 is included in KDE Frameworks 5.50.0+ and version 1 in KDE Frameworks 5.44.0+.
-
 
 ## Description:
 
@@ -27,6 +17,16 @@ Add syntax highlighting to KDE text editors (as Kate, KWrite, KDevelop or any ap
 * SELinux Kernel Policy Language (`selinux.xml`).
 * SELinux CIL Policies (`selinux-cil.xml`).
 * SELinux File Contexts (`selinux-fc.xml`).
+
+**Last versions:**
+* `selinux.xml`: Version 2 is included in KDE Frameworks 5.51.0+.
+* `selinux-cil.xml`: Version 2 is included in KDE Frameworks 5.50.0+.
+* `selinux-fc.xml`: Version 3 is included in KDE Frameworks 5.51.0+.
+
+**Old versions:**
+* `selinux.xml`: Version 1 is included in KDE Frameworks 5.50.0+
+* `selinux-cil.xml`: Version 1 is included in KDE Frameworks 5.44.0+.
+* `selinux-fc.xml`: Version 2 is included in KDE Frameworks 5.50.0+ and version 1 in KDE Frameworks 5.44.0+.
 
 
 ## About XML Files of Syntax Highlighting Definition:
