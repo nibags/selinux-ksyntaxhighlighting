@@ -1277,7 +1277,7 @@
 			<keyword context="#stay" attribute="Policy Capability" String="policy_capabilities"/>
 		</context>
 
-		<!-- Filsystem Keywords -->
+		<!-- Filesystem Keywords -->
 		<context name="_filesystem" attribute="Normal Text" lineEndContext="#stay">
 			<keyword context="#stay" attribute="Filesystem" String="filesystem"/>
 		</context>
