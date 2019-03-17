@@ -1,6 +1,6 @@
 # SELinux Policies Syntax Highlighting Definition for Kate
 
-![Example of SELinux policies (TE module & CIL policy) syntax highlighting](https://raw.githubusercontent.com/nibags/selinux-ksyntaxhighlighting/master/test/images/selinux-preview.png)
+![Example of SELinux policies (CIL policy & TE module) syntax highlighting](https://raw.githubusercontent.com/nibags/selinux-ksyntaxhighlighting/master/test/images/selinux-preview.png)
 
 **Author:** Nibaldo González (<nibgonz@gmail.com>)
 
@@ -14,20 +14,22 @@ These files are part of the KDE's KSyntaxHighlighting Framework.
 
 Add syntax highlighting to KDE text editors (as Kate, KWrite, KDevelop or any application that uses the KSyntaxHighlighting or KTextEditor Framework) for:
 
-* SELinux Kernel Policy Language (`selinux.xml`).
-* SELinux CIL Policies (`selinux-cil.xml`).
-* SELinux File Contexts (`selinux-fc.xml`).
+* __SELinux Kernel Policy Language__ (`selinux.xml`).
+* __SELinux CIL Policies__ (`selinux-cil.xml`).
+* __SELinux File Contexts__ (`selinux-fc.xml`).
 
-**Last versions:**
+**Last Versions:**
 * `selinux.xml`: Version 2 is included in KDE Frameworks 5.51.0+.
 * `selinux-cil.xml`: Version 2 is included in KDE Frameworks 5.50.0+.
 * `selinux-fc.xml`: Version 3 is included in KDE Frameworks 5.51.0+.
 
-**Old versions:**
-* `selinux.xml`: Version 1 is included in KDE Frameworks 5.50.0+
-* `selinux-cil.xml`: Version 1 is included in KDE Frameworks 5.44.0+.
-* `selinux-fc.xml`: Version 2 is included in KDE Frameworks 5.50.0+ and version 1 in KDE Frameworks 5.44.0+.
+**NOTE:** `selinux-cil.xml` and `selinux-fc.xml` depend on `selinux.xml`.
 
+For details on the syntax of SELinux policies, visit:
+* SELinux Policy Languages: https://selinuxproject.org/page/PolicyLanguage
+* The SELinux Notebook: https://selinuxproject.org/page/Category:Notebook
+* CIL Documentation: https://github.com/SELinuxProject/selinux/tree/master/secilc/docs
+* SELinux Repository: https://github.com/SELinuxProject/selinux
 
 ## About XML Files of Syntax Highlighting Definition:
 
@@ -42,7 +44,6 @@ However, these XML files can also be stored in:
 For more details of KSyntaxHighlighting Framework, visit:
 * Official Repository: https://phabricator.kde.org/source/syntax-highlighting/
 * Documentation: https://docs.kde.org/stable5/en/applications/katepart/highlight.html
-
 
 ## Installation:
 
@@ -80,4 +81,69 @@ kate: syntax SELinux Policy;
 kate: syntax SELinux CIL Policy;
 kate: syntax SELinux File Contexts;
 ```
+
+## List of Versions:
+
+<table>
+    <tr>
+        <th width="110px">selinux.xml<br>Version</th>
+        <th width="150px">selinux-fc.xml<br>Version</th>
+        <th width="90px">Date</th>
+        <th>KDE<br>Frameworks</th>
+        <th>SELinux<br>Support<br>(checkpolicy)</th>
+        <th>Relevant Changes</th>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>3</td>
+        <td>Sep. 09, 2018</td>
+        <td>5.51.0</td>
+        <td></td>
+        <td>Update itemData's style for the new Solarized color schemes of Kate.</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>Aug. 28, 2018</td>
+        <td>5.50.0</td>
+        <td>2.8</th>
+        <td>Implement "selinux.xml": some rules and keywords of "selinux-fc.xml" are moved there.</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>1</td>
+        <td>Jan. 26, 2018</td>
+        <td>5.44.0</td>
+        <td>-</td>
+        <td></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th width="150px">selinux-cil.xml<br>Version</th>
+        <th>Date</th>
+        <th>KDE<br>Frameworks</th>
+        <th>SELinux<br>Support<br>(secilc)</th>
+        <th>Relevant Changes</th>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Aug. 28, 2018</td>
+        <td>5.50.0</td>
+        <td>2.8</td>
+        <td><ul>
+            <li>Add keywords of Android and BPF permissions.</li>
+            <li>Implement "selinux.xml": some rules and keywords of "selinux-cil.xml" are moved there.</li>
+        </ul></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Jan. 26, 2018</td>
+        <td>5.44.0</td>
+        <td>2.7</td>
+        <td></td>
+    </tr>
+</table>
+
 <!-- kate: syntax Markdown; -->
