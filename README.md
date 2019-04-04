@@ -1,4 +1,4 @@
-# SELinux Policies Syntax Highlighting Definition for Kate
+# SELinux Policies Syntax Highlighting Definition for Kate (KSyntaxHighlighting Framework)
 
 ![Example of SELinux policies (CIL policy & TE module) syntax highlighting](https://raw.githubusercontent.com/nibags/selinux-ksyntaxhighlighting/master/test/images/selinux-preview.png)
 
@@ -6,13 +6,13 @@
 
 **Last Change:** September 2018
 
-```
-These files are part of the KDE's KSyntaxHighlighting Framework. 
-```
+    These files are part of the KDE's KSyntaxHighlighting Framework.
+
 
 ## Description:
 
-Add syntax highlighting to KDE text editors (as Kate, KWrite, KDevelop or any application that uses the KSyntaxHighlighting or KTextEditor Framework) for:
+Add syntax highlighting to KDE text editors (such as Kate, KWrite, KDevelop or 
+any application that uses the KSyntaxHighlighting or KTextEditor Framework) for:
 
 * __SELinux Kernel Policy Language__ (`selinux.xml`).
 * __SELinux CIL Policies__ (`selinux-cil.xml`).
@@ -38,8 +38,8 @@ consist of XML files that are compiled in the KDE Frameworks libraries.
 
 However, these XML files can also be stored in:
 
-	$HOME/.local/share/org.kde.syntax-highlighting/syntax/
-	/usr/share/org.kde.syntax-highlighting/syntax/
+    $HOME/.local/share/org.kde.syntax-highlighting/syntax/
+    /usr/share/org.kde.syntax-highlighting/syntax/
 
 For more details of KSyntaxHighlighting Framework, visit:
 * Official Repository: https://phabricator.kde.org/source/syntax-highlighting/
@@ -47,11 +47,14 @@ For more details of KSyntaxHighlighting Framework, visit:
 
 ## Installation:
 
-**Important:** `selinux-cil.xml` & `selinux-fc.xml` depend on `selinux.xml`. To avoid problems, do not install the files separately, but the 3 together.
+**Important:** `selinux-cil.xml` & `selinux-fc.xml` depend on `selinux.xml`. 
+To avoid problems, do not install the files separately, but the 3 together.
 
-If you do not have the latest version of KDE Frameworks, you can manually install the latest `.xml` files.
+If you do not have the latest version of KDE Frameworks, you can manually install 
+the latest `.xml` files.
 
-Copy the `.xml` files to `$HOME/.local/share/org.kde.syntax-highlighting/syntax/` (for local user) or `/usr/share/org.kde.syntax-highlighting/syntax/` (for all users).
+Copy the `.xml` files to `$HOME/.local/share/org.kde.syntax-highlighting/syntax/` 
+(for local user) or `/usr/share/org.kde.syntax-highlighting/syntax/` (for all users).
 
 Ex.: 
 For local user:
@@ -67,20 +70,22 @@ sudo cp ./selinux{,-cil,-fc}.xml /usr/share/org.kde.syntax-highlighting/syntax/
 
 ## Usage:
 
-Syntax highlighting of SELinux policies (`selinux.xml`) is automatically applied to named files: `*.te`, `*.if`, `*.spt`, `policy.conf`, `access_vectors`, `mls`, `mcs` `mls_macros`, `te_macros` `policy_capabilities` `seapp_contexts` & `port_contexts`.
+Syntax highlighting of SELinux policies (`selinux.xml`) is automatically applied to 
+named files: `*.te`, `*.if`, `*.spt`, `policy.conf`, `access_vectors`, `mls`, `mcs`, 
+`mls_macros`, `te_macros`, `policy_capabilities`, `seapp_contexts` & `port_contexts`.
 
-Syntax highlighting of SELinux file contexts is applied to named files: `*.fc`, `file_contexts`, `file_contexts_*`, `file_contexts.local`, `file_contexts.homedirs`, `file_contexts.template`, `homedir_template`, `property_contexts`, `service_contexts`, `hwservice_contexts`, `initial_sid_contexts`, `genfs_contexts` & `fs_use`.
+Syntax highlighting of SELinux file contexts is applied to named files: `*.fc`, 
+`file_contexts`, `file_contexts_*`, `file_contexts.local`, `file_contexts.homedirs`, 
+`file_contexts.template`, `homedir_template`, `property_contexts`, `service_contexts`, 
+`hwservice_contexts`, `initial_sid_contexts`, `genfs_contexts` & `fs_use`.
 
 Syntax highlighting of SELinux CIL policies is applied to files with `.cil` extension.
 
-Not all SELinux configuration & build files are highlighted by default, since some have generic names.
+You can also force the syntax highlighting by writing a comment with:
 
-You can also force the syntax highlighting by writing a comment with: 
-```
-kate: syntax SELinux Policy;
-kate: syntax SELinux CIL Policy;
-kate: syntax SELinux File Contexts;
-```
+    kate: syntax SELinux Policy;
+    kate: syntax SELinux CIL Policy;
+    kate: syntax SELinux File Contexts;
 
 ## List of Versions:
 
@@ -94,11 +99,19 @@ kate: syntax SELinux File Contexts;
         <th>Relevant Changes</th>
     </tr>
     <tr>
+        <td>-</td>
+        <td>4</td>
+        <td>Apr. 02, 2019</td>
+        <td>5.57.0</td>
+        <td>2.8 / 2.9</td>
+        <td>No changes, only one indentation is removed.</td>
+    </tr>
+    <tr>
         <td>2</td>
         <td>3</td>
         <td>Sep. 09, 2018</td>
         <td>5.51.0</td>
-        <td></td>
+        <td>2.8</td>
         <td>Update itemData's style for the new Solarized color schemes of Kate.</td>
     </tr>
     <tr>
@@ -126,6 +139,13 @@ kate: syntax SELinux File Contexts;
         <th>KDE<br>Frameworks</th>
         <th>SELinux<br>Support<br>(secilc)</th>
         <th>Relevant Changes</th>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Apr. 02, 2019</td>
+        <td>5.57.0</td>
+        <td>2.8 / 2.9</td>
+        <td>No changes, only one indentation is removed.</td>
     </tr>
     <tr>
         <td>2</td>
