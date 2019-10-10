@@ -2,11 +2,11 @@
 <!DOCTYPE language SYSTEM "language.dtd"
 [
 	<!-- Identifier with M4 Arg. or variables -->
-	<!ENTITY charIden         "(\$[@#]|[\w\-\$\*\{\}&#037;])">
-	<!ENTITY simpleIdentifier "(\$[@#]|[a-zA-Z\$&#037;])&charIden;*">
-	<!ENTITY identifier       "&simpleIdentifier;(\.?&charIden;)*">
-	<!ENTITY startIdentifier  "(\b[a-zA-Z]|\$[@#]|[\$&#037;])&charIden;*(\.?&charIden;)*">
-	<!ENTITY mlsLevel         "&identifier;(\s*:\s*&identifier;(\s*,\s*&identifier;)*)?">
+	<!ENTITY charIden         "(?:\$[@#]|[\w\-\$\*\{\}&#037;])">
+	<!ENTITY simpleIdentifier "(?:\$[@#]|[a-zA-Z\$&#037;])&charIden;*">
+	<!ENTITY identifier       "&simpleIdentifier;(?:\.?&charIden;)*">
+	<!ENTITY startIdentifier  "(?:\b[a-zA-Z]|\$[@#]|[\$&#037;])&charIden;*(?:\.?&charIden;)*">
+	<!ENTITY mlsLevel         "&identifier;(?:\s*\:\s*&identifier;(?:\s*,\s*&identifier;)*)?">
 ]>
 
 <!--
@@ -42,6 +42,7 @@
     - Policy Build Files: initial_sid_contexts, genfs_contexts, fs_use
 
   Change log:
+   * Version ? [05-Oct-2019]: Use non-capturing groups in RegExpr.
    * Version 4 [02-Apr-2019]: Remove one indentation.
    * Version 3 [09-Sep-2018]:
       - Update itemData's style for the new Solarized color schemes.
@@ -69,7 +70,7 @@
 		<context name="_normal" attribute="Normal Text" lineEndContext="#stay">
 			<IncludeRules context="_m4_preprocessor##SELinux Policy"/>
 			<IncludeRules context="_find_comments##SELinux Policy"/>
-			<RegExpr context="#stay" attribute="File Type" String="(\s|^)\-[bcdpls\-](?=\s|$)"/>
+			<RegExpr context="#stay" attribute="File Type" String="(?:\s|^)\-[bcdpls\-](?=\s|$)"/>
 
 			<DetectChar context="_path_content" attribute="Path" char="/"/>
 			<DetectChar context="_quoted" attribute="Text Quoted" char="&quot;"/>
@@ -81,11 +82,11 @@
 			<IncludeRules context="_m4_quotes##SELinux Policy"/>
 
 			<!-- File Contexts:  user:role:type:s0:c0 -->
-			<RegExpr context="_fc_user" attribute="User" String="&startIdentifier;(?=(\s*:\s*&identifier;){2}(\s*:\s*&mlsLevel;(\s*\-\s*&mlsLevel;)?)?\b)"/>
+			<RegExpr context="_fc_user" attribute="User" String="&startIdentifier;(?=(?:\s*\:\s*&identifier;){2}(?:\s*\:\s*&mlsLevel;(?:\s*\-\s*&mlsLevel;)?)?\b)"/>
 			<WordDetect context="#stay" attribute="Other Keywords" String="&lt;&lt;none&gt;&gt;"/>
 
 			<!-- Java-Language-Style Package Name & other Names, for SE Android (this avoid highlighting keywords) -->
-			<RegExpr context="#stay" attribute="Path" String="\.?[a-zA-Z]\w*((\.|::)\w+)+(?=[^\(]|$)" firstNonSpace="true"/>
+			<RegExpr context="#stay" attribute="Path" String="\.?[a-zA-Z]\w*(?:(?:\.|::)\w+)+(?=[^\(]|$)" firstNonSpace="true"/>
 
 			<!-- Functions -->
 			<DetectChar context="_parentheses_content" attribute="Normal Text" char="(" beginRegion="ParenthesesBlock"/>
@@ -111,7 +112,7 @@
 
 			<!-- Highlight only the statements that contain definition of file contexts -->
 			<IncludeRules context="_statements_file_contexts##SELinux Policy"/>
-			<RegExpr context="#stay" String="[a-zA-Z](\.?[\w\-]+)*"/>
+			<RegExpr context="#stay" String="[a-zA-Z](?:\.?[\w\-]+)*"/>
 			<HlCHex context="#pop" attribute="Number"/>
 			<Int context="#pop" attribute="Number"/>
 		</context>
@@ -119,7 +120,7 @@
 		<context name="_parentheses_content" attribute="Normal Text" lineEndContext="#stay">
 			<DetectChar context="#pop" attribute="Normal Text" char=")" endRegion="ParenthesesBlock"/>
 			<!-- File Contexts:  (user:role:type,s0) -->
-			<RegExpr context="_gen_context_fc_user" attribute="User" String="&startIdentifier;(\s*:\s*&identifier;){2}(\s*,\s*&identifier;)*\b" lookAhead="true"/>
+			<RegExpr context="_gen_context_fc_user" attribute="User" String="&startIdentifier;(?:\s*\:\s*&identifier;){2}(?:\s*,\s*&identifier;)*\b" lookAhead="true"/>
 			<IncludeRules context="_normal"/>
 		</context>
 
