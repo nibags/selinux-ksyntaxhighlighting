@@ -43,7 +43,7 @@ However, these XML files can also be stored in:
 
 For more details of KSyntaxHighlighting Framework, visit:
 * Official Repository: https://phabricator.kde.org/source/syntax-highlighting/
-* Documentation: https://docs.kde.org/stable5/en/applications/katepart/highlight.html
+* Documentation: https://docs.kde.org/trunk5/en/applications/katepart/highlight.html
 
 ## Installation:
 
