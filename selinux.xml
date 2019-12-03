@@ -55,7 +55,7 @@
     file contexts are highlighted by "selinux-fc.xml".
 
   Change log:
-	* Version ? [05-Oct-2019]: Use non-capturing groups in RegExpr.
+	* Version 3 [25-Oct-2019]: Use non-capturing groups in RegExpr.
 	* Version 2 [09-Sep-2018]:
 		- Update itemData's style for the new Solarized color schemes.
 	* Version 1 [28-Aug-2018, by Nibaldo González]:
