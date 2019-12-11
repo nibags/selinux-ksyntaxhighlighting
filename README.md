@@ -4,7 +4,7 @@
 
 **Author:** Nibaldo González (<nibgonz@gmail.com>)
 
-**Last Change:** September 2018
+**Last Change:** December 2019
 
     These files are part of the KDE's KSyntaxHighlighting Framework.
 
@@ -17,11 +17,6 @@ any application that uses the KSyntaxHighlighting or KTextEditor Framework) for:
 * __SELinux Kernel Policy Language__ (`selinux.xml`).
 * __SELinux CIL Policies__ (`selinux-cil.xml`).
 * __SELinux File Contexts__ (`selinux-fc.xml`).
-
-**Last Versions:**
-* `selinux.xml`: Version 2 is included in KDE Frameworks 5.51.0+.
-* `selinux-cil.xml`: Version 2 is included in KDE Frameworks 5.50.0+.
-* `selinux-fc.xml`: Version 3 is included in KDE Frameworks 5.51.0+.
 
 **NOTE:** `selinux-cil.xml` and `selinux-fc.xml` depend on `selinux.xml`.
 
@@ -99,6 +94,17 @@ You can also force the syntax highlighting by writing a comment with:
         <th>Relevant Changes</th>
     </tr>
     <tr>
+        <td>3</td>
+        <td>-</td>
+        <td>Dec. 10, 2019</td>
+        <td>5.66.0</td>
+        <td>3.0</td>
+        <td><ul>
+            <li>Add "glblub" keyword (default_range).</li>
+            <li>Update permissions list.</li>
+        </ul></td>
+    </tr>
+    <tr>
         <td>-</td>
         <td>4</td>
         <td>Apr. 02, 2019</td>
@@ -139,6 +145,13 @@ You can also force the syntax highlighting by writing a comment with:
         <th>KDE<br>Frameworks</th>
         <th>SELinux<br>Support<br>(secilc)</th>
         <th>Relevant Changes</th>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Dec. 10, 2019</td>
+        <td>5.66.0</td>
+        <td>3.0</td>
+        <td>Add "glblub" keyword (defaultrange).</td>
     </tr>
     <tr>
         <td>3</td>
