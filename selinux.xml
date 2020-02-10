@@ -49,23 +49,26 @@
     https://selinuxproject.org/page/Category:Notebook
 
   NOTE:
+  - This highlighter also includes support for M4 macros, used by the Reference Policy.
   - This file is required by "selinux-cil.xml" and "selinux-fc.xml".
   - Only the most relevant policy build files and config. files are highlighted by
     default, since some have very generic names. Files with definition of
     file contexts are highlighted by "selinux-fc.xml".
 
   Change log:
-	* Version 3 [10-Dec-2019]:
-		- Add "glblub" keyword (default_range).
-		- Update permissions list.
-	* Version 2 [09-Sep-2018]:
-		- Update itemData's style for the new Solarized color schemes.
-	* Version 1 [28-Aug-2018, by Nibaldo González]:
-		- Initial version. Syntax based on checkpolicy v2.8.
+   * Version 4 [09-Feb-2020]:
+      - Use non-capturing groups in RegExpr.
+   * Version 3 [10-Dec-2019]:
+      - Add "glblub" keyword (default_range).
+      - Update permissions list.
+   * Version 2 [09-Sep-2018]:
+      - Update itemData's style for the new Solarized color schemes.
+   * Version 1 [28-Aug-2018, by Nibaldo González]:
+      - Initial version. Syntax based on checkpolicy v2.8.
 -->
 
 <language name="SELinux Policy"
-          version="3"
+          version="4"
           kateversion="5.0"
           section="Sources"
           extensions="*.te;*.if;*.spt;policy.conf;access_vectors;mls;mcs;mls_macros;te_macros;policy_capabilities;seapp_contexts;port_contexts"
