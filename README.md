@@ -33,8 +33,24 @@ consist of XML files that are compiled in the KDE Frameworks libraries.
 
 However, these XML files can also be stored in:
 
-    $HOME/.local/share/org.kde.syntax-highlighting/syntax/
-    /usr/share/org.kde.syntax-highlighting/syntax/
+<table>
+    <tr>
+        <td>For local user</td>
+        <td>$HOME/.local/share/org.kde.syntax-highlighting/syntax/</td>
+    </tr>
+    <tr>
+        <td>For all users</td>
+        <td>/usr/share/org.kde.syntax-highlighting/syntax/</td>
+    </tr>
+    <tr>
+        <td>For <a href="https://flathub.org/apps/details/org.kde.kate">Kate's Flatpak package</a></td>
+        <td>$HOME/.var/app/org.kde.kate/data/org.kde.syntax-highlighting/syntax/</td>
+    </tr>
+    <tr>
+        <td>For <a href="https://snapcraft.io/kate">Kate's Snap package</a></td>
+        <td>$HOME/snap/kate/current/.local/share/org.kde.syntax-highlighting/syntax/</td>
+    </tr>
+</table>
 
 For more details of KSyntaxHighlighting Framework, visit:
 * Official Repository: https://phabricator.kde.org/source/syntax-highlighting/
@@ -48,8 +64,8 @@ To avoid problems, do not install the files separately, but the 3 together.
 If you do not have the latest version of KDE Frameworks, you can manually install 
 the latest `.xml` files.
 
-Copy the `.xml` files to `$HOME/.local/share/org.kde.syntax-highlighting/syntax/` 
-(for local user) or `/usr/share/org.kde.syntax-highlighting/syntax/` (for all users).
+Copy the `.xml` files to the directory of the XML syntax definition files,
+mentioned in the previous section.
 
 Ex.: 
 For local user:
@@ -61,6 +77,16 @@ For all users:
 ```bash
 sudo mkdir -p /usr/share/org.kde.syntax-highlighting/syntax/
 sudo cp ./selinux{,-cil,-fc}.xml /usr/share/org.kde.syntax-highlighting/syntax/
+```
+For Kate's Flatpak package:
+```bash
+mkdir -p $HOME/.var/app/org.kde.kate/data/org.kde.syntax-highlighting/syntax/
+cp ./selinux{,-cil,-fc}.xml $HOME/.var/app/org.kde.kate/data/org.kde.syntax-highlighting/syntax/
+```
+For Kate's Snap package:
+```bash
+mkdir -p $HOME/snap/kate/current/.local/share/org.kde.syntax-highlighting/syntax/
+cp ./selinux{,-cil,-fc}.xml $HOME/snap/kate/current/.local/share/org.kde.syntax-highlighting/syntax/
 ```
 
 ## Usage:
