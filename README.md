@@ -4,7 +4,9 @@
 
 **Author:** Nibaldo González (<nibgonz@gmail.com>)
 
-**Last Change:** December 2019
+**Last Change:** September 2020
+
+**Requirements:** KDE Frameworks 5.53.0 or higher
 
     These files are part of the KDE's KSyntaxHighlighting Framework.
 
@@ -114,6 +116,14 @@ You can also force the syntax highlighting by writing a comment with:
         <th>Relevant Changes</th>
     </tr>
     <tr>
+        <td>5</td>
+        <td>7</td>
+        <td>Sep. 30, 2020</td>
+        <td>5.75.0</td>
+        <td>3.0</td>
+        <td>Use include keywords.</td>
+    </tr>
+    <tr>
         <td>3</td>
         <td>-</td>
         <td>Dec. 10, 2019</td>
@@ -165,6 +175,13 @@ You can also force the syntax highlighting by writing a comment with:
         <th>KDE<br>Frameworks</th>
         <th>SELinux<br>Support<br>(secilc)</th>
         <th>Relevant Changes</th>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Sep. 30, 2020</td>
+        <td>5.75.0</td>
+        <td>3.0</td>
+        <td>Use include keywords and improve color brackets.</td>
     </tr>
     <tr>
         <td>5</td>
