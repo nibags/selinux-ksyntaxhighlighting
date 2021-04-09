@@ -4,9 +4,9 @@
 
 **Author:** Nibaldo González (<nibgonz@gmail.com>)
 
-**Last Change:** September 2020
+**Last Change:** February 2020
 
-**Requirements:** KDE Frameworks 5.53.0 or higher
+**Requirements:** KDE Frameworks 5.80.0 or higher
 
     These files are part of the KDE's KSyntaxHighlighting Framework.
 
@@ -45,16 +45,20 @@ However, these XML files can also be stored in:
         <td>/usr/share/org.kde.syntax-highlighting/syntax/</td>
     </tr>
     <tr>
-        <td>For <a href="https://flathub.org/apps/details/org.kde.kate">Kate's Flatpak package</a></td>
-        <td>$HOME/.var/app/org.kde.kate/data/org.kde.syntax-highlighting/syntax/</td>
+        <td>For Flatpak packages</td>
+        <td>$HOME/.var/app/<em>package-name</em>/data/org.kde.syntax-highlighting/syntax/</td>
     </tr>
     <tr>
-        <td>For <a href="https://snapcraft.io/kate">Kate's Snap package</a></td>
-        <td>$HOME/snap/kate/current/.local/share/org.kde.syntax-highlighting/syntax/</td>
+        <td>For Snap packages</a></td>
+        <td>$HOME/snap/<em>package-name</em>/current/.local/share/org.kde.syntax-highlighting/syntax/</td>
     </tr>
     <tr>
         <td>On Windows</a></td>
         <td>%USERPROFILE%\AppData\Local\org.kde.syntax-highlighting\syntax\ </td>
+    </tr>
+    <tr>
+        <td>On macOS</td>
+        <td>$HOME/Library/Application Support/org.kde.syntax-highlighting/syntax/</td>
     </tr>
 </table>
 
@@ -116,6 +120,14 @@ You can also force the syntax highlighting by writing a comment with:
         <th>Relevant Changes</th>
     </tr>
     <tr>
+        <td>9</td>
+        <td>9</td>
+        <td>Feb. 24, 2021</td>
+        <td>5.80.0</td>
+        <td>3.0</td>
+        <td>Improve colors and performance of RegExpr rules.</td>
+    </tr>
+    <tr>
         <td>5</td>
         <td>7</td>
         <td>Sep. 30, 2020</td>
@@ -175,6 +187,13 @@ You can also force the syntax highlighting by writing a comment with:
         <th>KDE<br>Frameworks</th>
         <th>SELinux<br>Support<br>(secilc)</th>
         <th>Relevant Changes</th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>Feb. 19, 2021</td>
+        <td>5.80.0</td>
+        <td>3.0</td>
+        <td>Improve performance of RegExpr rules.</td>
     </tr>
     <tr>
         <td>7</td>

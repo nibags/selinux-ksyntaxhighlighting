@@ -15,7 +15,7 @@
 
    This file is part of the KDE's KSyntaxHighlighting framework.
 
-   SPDX-FileCopyrightText: 2018-2020 Nibaldo González S. <nibgonz@gmail.com>
+   SPDX-FileCopyrightText: 2018-2021 Nibaldo González S. <nibgonz@gmail.com>
 
    SPDX-License-Identifier: MIT
 
@@ -45,7 +45,7 @@
 -->
 
 <language name="SELinux CIL Policy"
-          version="7"
+          version="10"
           kateversion="5.53"
           section="Sources"
           extensions="*.cil"
@@ -350,8 +350,7 @@
 		<context name="_comment" attribute="Comment" lineEndContext="#pop">
 			<DetectSpaces />
 			<LineContinue context="#pop" attribute="Comment"/>
-			<IncludeRules context="##Alerts"/>
-			<IncludeRules context="##Modelines"/>
+			<IncludeRules context="##Comments"/>
 			<IncludeRules context="_default_comment##SELinux Policy"/>
 		</context>
 
@@ -424,8 +423,7 @@
 			     (permissionx permissionx_id (ioctl class_id (permission ... | expr ...))) -->
 			<RegExpr context="#pop" attribute="Type Name Statements" String="ioctl(?=\s+[&symbol;]+\s*\()"/>
 			<!-- ioctl can be a kind of permissionx or AV permission -->
-			<RegExpr context="#pop!_av_permissions_statement" attribute="Type Name Statements" String="ioctl(?=(?:\s+[&symbol;]+)?\s*(?:$|;))"/>
-			<RegExpr context="#pop!_av_permissions_statement" attribute="Type Name Statements" String="ioctl(?=\s+[&symbol;]+\s+\d)"/>
+			<RegExpr context="#pop!_av_permissions_statement" attribute="Type Name Statements" String="ioctl(?=\s+[&symbol;]+\s+\d|(?:\s+[&symbol;]+)?\s*(?:$|;))"/>
 		</context>
 
 		<context name="_default_statement" attribute="Normal Text" lineEndContext="#stay">
@@ -483,7 +481,7 @@
 		<context name="_statement_level1" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level1" lineEndContext="#pop!_rule_level1">
 			<!-- When writing a statement and then a delimiter (like a space), go to the context "_rule_level1" -->
 			<IncludeRules context="_default_statement"/>
-			<RegExpr context="#pop!_rule_without_statement_level1" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
+			<RegExpr context="#pop!_rule_without_statement_level1" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 		</context>
 		<context name="_rule_level1" attribute="Normal Text" lineEndContext="#stay"> <!-- Rule content -->
 			<DetectChar attribute="Brackets Level 2" context="_rule_bracket_level2" char="("/>
@@ -501,7 +499,7 @@
 		</context>
 		<context name="_statement_level2" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level2" lineEndContext="#pop!_rule_level2">
 			<IncludeRules context="_default_statement"/>
-			<RegExpr context="#pop!_rule_without_statement_level2" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
+			<RegExpr context="#pop!_rule_without_statement_level2" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 		</context>
 		<context name="_rule_level2" attribute="Normal Text" lineEndContext="#stay">
 			<DetectChar attribute="Brackets Level 3" context="_rule_bracket_level3" char="("/>
@@ -519,7 +517,7 @@
 		</context>
 		<context name="_statement_level3" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level3" lineEndContext="#pop!_rule_level3">
 			<IncludeRules context="_default_statement"/>
-			<RegExpr context="#pop!_rule_without_statement_level3" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
+			<RegExpr context="#pop!_rule_without_statement_level3" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 		</context>
 		<context name="_rule_level3" attribute="Normal Text" lineEndContext="#stay">
 			<DetectChar attribute="Brackets Level 4" context="_rule_bracket_level4" char="("/>
@@ -537,7 +535,7 @@
 		</context>
 		<context name="_statement_level4" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level4" lineEndContext="#pop!_rule_level4">
 			<IncludeRules context="_default_statement"/>
-			<RegExpr context="#pop!_rule_without_statement_level4" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
+			<RegExpr context="#pop!_rule_without_statement_level4" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 		</context>
 		<context name="_rule_level4" attribute="Normal Text" lineEndContext="#stay">
 			<DetectChar attribute="Brackets Level 5" context="_rule_bracket_level5" char="("/>
@@ -555,7 +553,7 @@
 		</context>
 		<context name="_statement_level5" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level5" lineEndContext="#pop!_rule_level5">
 			<IncludeRules context="_default_statement"/>
-			<RegExpr context="#pop!_rule_without_statement_level5" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
+			<RegExpr context="#pop!_rule_without_statement_level5" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 		</context>
 		<context name="_rule_level5" attribute="Normal Text" lineEndContext="#stay">
 			<DetectChar attribute="Brackets Level 6" context="_rule_bracket_level6" char="("/>
@@ -573,7 +571,7 @@
 		</context>
 		<context name="_statement_level6" attribute="Normal Text" fallthrough="true" fallthroughContext="#pop!_rule_level6" lineEndContext="#pop!_rule_level6">
 			<IncludeRules context="_default_statement"/>
-			<RegExpr context="#pop!_rule_without_statement_level6" attribute="Normal Text" String="&statementchar;+" lookAhead="true"/>
+			<RegExpr context="#pop!_rule_without_statement_level6" attribute="Normal Text" String="&statementchar;" lookAhead="true"/>
 		</context>
 		<context name="_rule_level6" attribute="Normal Text" lineEndContext="#stay">
 			<DetectChar attribute="Brackets Level 1" context="_rule_bracket_level1" char="("/>
