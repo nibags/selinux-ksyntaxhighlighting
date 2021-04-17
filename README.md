@@ -4,7 +4,7 @@
 
 **Author:** Nibaldo González (<nibgonz@gmail.com>)
 
-**Last Change:** February 2020
+**Last Change:** February 2021
 
 **Requirements:** KDE Frameworks 5.80.0 or higher
 
